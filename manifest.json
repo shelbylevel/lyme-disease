@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "locale": "en_US",
+  "platform": "4.5.1",
+  "metadata": {
+    "appmode": "shiny",
+    "primary_rmd": null,
+    "primary_html": null,
+    "content_category": null,
+    "has_parameters": false
+  },
+  "environment": {
+    "r": {
+      "requires": "~=4.5.0"
+    }
+  },
+  "packages": {
+    "renv": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com",
+      "description": {
+        "Package": "renv",
+        "Type": "Package",
+        "Title": "Project Environments",
+        "Version": "1.1.5",
+        "Authors@R": "c(\n    person(\"Kevin\", \"Ushey\", role = c(\"aut\", \"cre\"), email = \"kevin@rstudio.com\",\n           comment = c(ORCID = \"0000-0003-2880-7407\")),\n    person(\"Hadley\", \"Wickham\", role = c(\"aut\"), email = \"hadley@rstudio.com\",\n           comment = c(ORCID = \"0000-0003-4757-117X\")),\n    person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\"))\n    )",
+        "Description": "A dependency management toolkit for R. Using 'renv', you can create\n    and manage project-local R libraries, save the state of these libraries to\n    a 'lockfile', and later restore your library as required. Together, these\n    tools can help make your projects more isolated, portable, and reproducible.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://rstudio.github.io/renv/, https://github.com/rstudio/renv",
+        "BugReports": "https://github.com/rstudio/renv/issues",
+        "Imports": "utils",
+        "Suggests": "BiocManager, cli, compiler, covr, cpp11, devtools, generics,\ngitcreds, jsonlite, jsonvalidate, knitr, miniUI, modules,\npackrat, pak, R6, remotes, reticulate, rmarkdown, rstudioapi,\nshiny, testthat, uuid, waldo, yaml, webfakes",
+        "Encoding": "UTF-8",
+        "RoxygenNote": "7.3.2",
+        "VignetteBuilder": "knitr",
+        "Config/Needs/website": "tidyverse/tidytemplate",
+        "Config/testthat/edition": "3",
+        "Config/testthat/parallel": "true",
+        "Config/testthat/start-first": "bioconductor,python,install,restore,snapshot,retrieve,remotes",
+        "NeedsCompilation": "no",
+        "Packaged": "2025-07-24 20:47:34 UTC; kevin",
+        "Author": "Kevin Ushey [aut, cre] (ORCID: <https://orcid.org/0000-0003-2880-7407>),\n  Hadley Wickham [aut] (ORCID: <https://orcid.org/0000-0003-4757-117X>),\n  Posit Software, PBC [cph, fnd]",
+        "Maintainer": "Kevin Ushey <kevin@rstudio.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2025-07-24 21:40:02 UTC",
+        "Built": "R 4.5.0; ; 2025-07-24 22:11:42 UTC; unix"
+      }
+    }
+  },
+  "files": {
+    ".Rprofile": {
+      "checksum": "033bcbdc11c61d4bc79b07ea7561248a"
+    },
+    "global.r": {
+      "checksum": "29290507f01432ec20a1954319019e24"
+    },
+    "R/10_home_server.r": {
+      "checksum": "53b1da9150572234dfdfdbb1eeafde2f"
+    },
+    "R/10_home_ui.r": {
+      "checksum": "711af46d36bfb5d504c57544044529ed"
+    },
+    "R/2_education_server.r": {
+      "checksum": "4af27541525f0f2cc96a79a38725813e"
+    },
+    "R/2_education_ui.r": {
+      "checksum": "d312794905df37c3f0fe4e169f6c7216"
+    },
+    "R/20_education_server_noscrollytell.r": {
+      "checksum": "4af27541525f0f2cc96a79a38725813e"
+    },
+    "R/20_education_ui_noscrollytell.r": {
+      "checksum": "9eb017f413936e83afe9aee9a3530601"
+    },
+    "R/30_explorer_server_noscrollytell.r": {
+      "checksum": "5095e850d0f9a17810c17c8b269cb7aa"
+    },
+    "R/30_explorer_server.r": {
+      "checksum": "35f2a48ff2fa7637fd67953ca58fe258"
+    },
+    "R/30_explorer_ui_noscrollytell.r": {
+      "checksum": "996246767afb7376b075be67ca9204dc"
+    },
+    "R/30_explorer_ui.r": {
+      "checksum": "f7b1980c2467c2e188f909b343fa3d24"
+    },
+    "R/30_viz_server.r": {
+      "checksum": "eb13e04c8b37618836704dc999e43fd4"
+    },
+    "R/30_viz_ui.r": {
+      "checksum": "a0b381f2b123cd30072d690a4d31c7d1"
+    },
+    "R/40_viz_server.r": {
+      "checksum": "eb13e04c8b37618836704dc999e43fd4"
+    },
+    "R/40_viz_ui.r": {
+      "checksum": "a0b381f2b123cd30072d690a4d31c7d1"
+    },
+    "R/50_settings_server_noscrollytell.r": {
+      "checksum": "0b6197ce4541fb91496a3d77d99db356"
+    },
+    "R/50_settings_server.r": {
+      "checksum": "0b6197ce4541fb91496a3d77d99db356"
+    },
+    "R/50_settings_ui_noscrollytell.r": {
+      "checksum": "d6d6d2630513af1914b15a350449b879"
+    },
+    "R/50_settings_ui.r": {
+      "checksum": "d6d6d2630513af1914b15a350449b879"
+    },
+    "README.md": {
+      "checksum": "db57cb32390e6d18eed5188aed4a3659"
+    },
+    "renv.lock": {
+      "checksum": "1dfd24d52f37b641878feb09ffac7b9d"
+    },
+    "scrollytell.R": {
+      "checksum": "33e32f4084ab71732c95681ea53baa2b"
+    },
+    "server.r": {
+      "checksum": "a1dc38ec432e2287d1a058346e9805e0"
+    },
+    "ui.r": {
+      "checksum": "f82cde271ee42ebc5acbcb244276dcf9"
+    }
+  },
+  "users": null
+}
