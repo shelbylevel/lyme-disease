@@ -20,11 +20,11 @@ bslib::page_navbar(
     fg = "#1B1B1B"
   ),
 
-  # Add custom CSS for full-height cards
-  tags$head(
+  # ------ Custom CSS ------------------------------------------------------------
+  header = tags$head(
     tags$style(HTML(
       "
-      /* Remove fixed heights, let cards expand naturally */
+      /* Remove fixed heights, let cards expand naturally to full height */
       .bslib-page-navbar .tab-content {
         height: auto !important;
         overflow-y: visible !important;
@@ -63,7 +63,7 @@ bslib::page_navbar(
         display: flex;
         align-items: center;
       }
-        
+
       /* For layout_column_wrap, let items size naturally */
       .bslib-grid {
         height: auto !important;
