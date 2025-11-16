@@ -24,29 +24,14 @@ bslib::page_navbar(
   header = tags$head(
     tags$style(HTML(
       "
-      /* Remove fixed heights, let cards expand naturally to full height */
-      .bslib-page-navbar .tab-content {
-        height: auto !important;
-        overflow-y: visible !important;
-      }
-      .card {
-        height: auto !important;
-        min-height: auto !important;
-      }
-      .card-body {
-        height: auto !important;
-        overflow-y: visible !important;
-      }
-
-      //* Ensure page scrolls normally */
-      body, html {
-        height: auto;
-        overflow-y: auto;
+      /* Remove flex behavior that causes stretching */
+      .html-fill-container {
+        display: block !important; /* Changed from flex to block */
       }
       
-      /* Remove any flex constraints that force height */
-      .bslib-page-navbar {
-        height: auto !important;
+      /* Remove equal-height rows in grid */
+      .bslib-grid {
+        grid-auto-rows: auto !important; /* Changed from 1fr to auto */
       }
       
       /* Scrollytell specific styles */
@@ -58,18 +43,11 @@ bslib::page_navbar(
         align-items: center;
         justify-content: center;
       }
+      
       .scrolly-section {
         min-height: 100vh;
         display: flex;
         align-items: center;
-      }
-
-      /* For layout_column_wrap, let items size naturally */
-      .bslib-grid {
-        height: auto !important;
-      }
-      .bslib-grid > .bslib-grid-item {
-        height: auto !important;
       }
     "
     ))
