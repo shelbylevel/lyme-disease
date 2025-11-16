@@ -12,7 +12,7 @@ home_ui <- function(id) {
 
   bslib::layout_column_wrap(
     width = 1,
-    heights_equal = "row",
+    #heights_equal = "row",
 
     # Page header with key message
     bslib::card(
