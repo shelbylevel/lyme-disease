@@ -74,6 +74,15 @@ education_ui <- function(id) {
             )
           )
         )
+      ),
+      card_footer(
+        "Source: ",
+        popover(
+          a("CDC (2024)", href = "#"),
+          markdown(
+            "Centers for Disease Control and Prevention. (2024). *Causes of Lyme disease*. [https://www.cdc.gov/lyme/causes/index.html](https://www.cdc.gov/lyme/causes/index.html)"
+          )
+        )
       )
     ),
 
