@@ -167,10 +167,10 @@ bslib::page_navbar(
         )
       ),
       style = "margin: 0; color: #6c757d;"
-    ),
-    tags$p(
-      "Data sources: CDC, NOAA, EPA",
-      style = "margin: 5px 0 0 0; font-size: 0.85em; color: #6c757d;"
-    )
+    ) # ,
+    # tags$p(
+    #   "Data sources: CDC, NOAA, EPA",
+    #   style = "margin: 5px 0 0 0; font-size: 0.85em; color: #6c757d;"
+    # )
   )
 )

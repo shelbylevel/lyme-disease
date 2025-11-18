@@ -47,7 +47,7 @@ education_ui <- function(id) {
           tags$em("Borrelia"),
           " bacteria, while along the West Coast of the US, western black-legged ticks are the dominant species. Both species are most commonly found in grass (especially taller grass), brushy, and wooded areas. Areas with leaf litter may also harbor ticks."
         ),
-        tags$br(),
+        tags$hr(),
         fluidRow(
           column(
             width = 6,
@@ -146,7 +146,7 @@ education_ui <- function(id) {
 
     # Treatment -------------------------------------------------------------
     bslib::layout_column_wrap(
-      width = 1 / 2,
+      #width = 1 / 2,
 
       bslib::card(
         bslib::card_header(
