@@ -24,14 +24,57 @@ bslib::page_navbar(
   header = tags$head(
     tags$style(HTML(
       "
-      /* Remove flex behavior that causes stretching */
-      .html-fill-container {
-        display: block !important; /* Changed from flex to block */
+      /* Remove flex from tab content */
+      .tab-pane.html-fill-container {
+        display: block !important;
+      }
+      
+      /* Ensure inactive tabs are hidden */
+      .tab-pane:not(.active) {
+        display: none !important;
+      }
+      
+      .tab-pane.active {
+        display: block !important;
       }
       
       /* Remove equal-height rows in grid */
       .bslib-grid {
-        grid-auto-rows: auto !important; /* Changed from 1fr to auto */
+        grid-auto-rows: auto !important;
+      }
+      
+      /* Remove gap spacing between grid items */
+      .bslib-gap-spacing {
+        gap: 0 !important;
+      }
+      
+      /* Remove fixed heights, let cards expand naturally */
+      .bslib-page-navbar .tab-content {
+        height: auto !important;
+        overflow-y: visible !important;
+      }
+      
+      .card {
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+      }
+      
+      .card-body {
+        height: auto !important;
+        min-height: auto !important;
+        overflow-y: visible !important;
+      }
+      
+      /* Ensure page scrolls normally */
+      body, html {
+        height: auto;
+        overflow-y: auto;
+      }
+      
+      .bslib-page-navbar {
+        height: auto !important;
+        min-height: 100vh;
       }
       
       /* Scrollytell specific styles */
@@ -48,6 +91,25 @@ bslib::page_navbar(
         min-height: 100vh;
         display: flex;
         align-items: center;
+      }
+      
+      /* Grid layout adjustments */
+      .bslib-grid {
+        height: auto !important;
+        align-items: start;
+      }
+      
+      .bslib-grid > .bslib-grid-item {
+        height: auto !important;
+        min-height: auto !important;
+      }
+      
+      .bslib-grid.grid {
+        align-content: start;
+      }
+      
+      [class*='bslib-mb-spacing'] {
+        height: auto !important;
       }
     "
     ))
