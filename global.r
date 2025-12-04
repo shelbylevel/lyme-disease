@@ -9,6 +9,8 @@ library(shiny)
 library(bslib)
 library(data.table)
 library(echarts4r)
+library(echarts4r.maps)
+library(highcharter)
 library(dplyr)
 library(sf) # For spatial data
 library(tigris) # For US state boundaries
@@ -39,7 +41,39 @@ lyme_palette <- c(
 # ------ Load Data -------------------------------------------------------------
 # In production, load actual Lyme disease data here
 # Example data structure you might use:
-# lyme_cases <- fread("data/lyme_cases_by_state_year.csv")
+map_data <- get_data_from_map(download_map_data("countries/us/us-all-all"))
+
+# map_data <- tigris::counties(
+#   cb = TRUE, #clip boundaries
+#   year = 2020
+# ) %>%
+#   select(STATEFP, COUNTYFP, GEOID)
+
+lyme_cases <- fread("data/ld-case-counts-cty-2001-2023.csv") %>%
+  janitor::clean_names() %>%
+  tidyr::pivot_longer(
+    cols = starts_with("cases"),
+    names_to = "year",
+    names_prefix = "cases",
+    values_to = "cases"
+  ) %>%
+  mutate(
+    ctyname = stringr::str_remove(ctyname, " County"),
+    fips = sprintf("%02d%03d", stcode, ctycode)
+  )
+
+available_years <- lyme_cases %>%
+  distinct(year) %>%
+  pull(year) %>%
+  as.numeric()
+
+available_geos <- c(
+  "United States",
+  lyme_cases %>%
+    distinct(stname) %>%
+    pull(stname)
+)
+
 # climate_data <- fread("data/climate_factors.csv")
 # tick_habitat <- fread("data/tick_habitat_suitability.csv")
 

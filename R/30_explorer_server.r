@@ -10,20 +10,20 @@
 geography_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-    
+
     # ------ SCROLLYTELL RENDERER ----------------------------------------------
-    
+
     scrollytell::render_scrollytell(
       outputId = "scr",
-      
+
       # Track which section is active
       active_section = reactive({
         input$scr
       })
     )
-    
+
     # ------ REACTIVE DATA -----------------------------------------------------
-    
+
     # Use year from scrollytell input if available, otherwise default
     selected_year <- reactive({
       if (!is.null(input$year_scrolly)) {
@@ -32,15 +32,26 @@ geography_server <- function(id) {
         2023
       }
     })
-    
+
     # Generate sample Lyme disease data by state
     state_data <- reactive({
       # High-risk endemic states
-      endemic_states <- c("Connecticut", "Delaware", "Maine", "Maryland", 
-                         "Massachusetts", "Minnesota", "New Hampshire", 
-                         "New Jersey", "New York", "Pennsylvania", 
-                         "Rhode Island", "Vermont", "Virginia", "Wisconsin")
-      
+      endemic_states <- c(
+        "Delaware",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Minnesota",
+        "New Hampshire",
+        "New Jersey",
+        "New York",
+        "Pennsylvania",
+        "Rhode Island",
+        "Vermont",
+        "Virginia",
+        "Wisconsin"
+      )
+
       # Create data frame
       states <- state.name
       data.frame(
@@ -49,8 +60,8 @@ geography_server <- function(id) {
         # Simulate higher rates in endemic states
         rate = ifelse(
           states %in% endemic_states,
-          runif(length(states), 30, 120),  # High endemic
-          runif(length(states), 0, 15)     # Low/emerging
+          runif(length(states), 30, 120), # High endemic
+          runif(length(states), 0, 15) # Low/emerging
         ),
         # Add some variation over years
         total_cases = ifelse(
@@ -64,40 +75,50 @@ geography_server <- function(id) {
           value = rate
         )
     })
-    
+
     # Generate time series data
     time_series_data <- reactive({
       years <- 2010:2023
-      
+
       # Top 5 endemic states
-      top_states <- c("Pennsylvania", "New York", "New Jersey", 
-                     "Connecticut", "Massachusetts")
-      
+      top_states <- c(
+        "Pennsylvania",
+        "New York",
+        "New Jersey",
+        "Connecticut",
+        "Massachusetts"
+      )
+
       # Create data for each state
-      do.call(rbind, lapply(top_states, function(st) {
-        base_cases <- switch(st,
-          "Pennsylvania" = 8000,
-          "New York" = 7000,
-          "New Jersey" = 5000,
-          "Connecticut" = 4000,
-          "Massachusetts" = 3500,
-          3000
-        )
-        
-        data.frame(
-          year = years,
-          state = st,
-          cases = base_cases * (1 + seq(0, 0.3, length.out = length(years))) +
-                  rnorm(length(years), 0, 500)
-        )
-      }))
+      do.call(
+        rbind,
+        lapply(top_states, function(st) {
+          base_cases <- switch(
+            st,
+            "Pennsylvania" = 8000,
+            "New York" = 7000,
+            "New Jersey" = 5000,
+            "Connecticut" = 4000,
+            "Massachusetts" = 3500,
+            3000
+          )
+
+          data.frame(
+            year = years,
+            state = st,
+            cases = base_cases *
+              (1 + seq(0, 0.3, length.out = length(years))) +
+              rnorm(length(years), 0, 500)
+          )
+        })
+      )
     })
-    
+
     # ------ DYNAMIC OUTPUT BASED ON SCROLL SECTION ----------------------------
-    
+
     output$map_output <- renderUI({
       section <- input$scr
-      
+
       if (is.null(section) || section == "section1" || section == "section2") {
         # Show US map for sections 1-2
         tagList(
@@ -121,24 +142,26 @@ geography_server <- function(id) {
         tagList(
           h4("Projected Expansion Risk", class = "text-center mb-3"),
           echarts4r::echarts4rOutput(ns("us_map"), height = "600px"),
-          p(class = "text-center text-muted mt-3",
+          p(
+            class = "text-center text-muted mt-3",
             "Areas in darker green show higher current risk. Climate change is expected 
-            to expand suitable habitat further north and west.")
+            to expand suitable habitat further north and west."
+          )
         )
       }
     })
-    
+
     # ------ CHART OUTPUTS -----------------------------------------------------
-    
+
     # US Map
     output$us_map <- echarts4r::renderEcharts4r({
       data <- state_data()
-      
+
       # Prepare data for map - echarts4r expects lowercase state names
       map_data <- data |>
         dplyr::select(name = state, value) |>
         dplyr::mutate(name = tolower(name))
-      
+
       # Create map using built-in USA map
       map_data |>
         echarts4r::e_charts(name) |>
@@ -158,20 +181,22 @@ geography_server <- function(id) {
         ) |>
         echarts4r::e_tooltip(
           trigger = "item",
-          formatter = htmlwidgets::JS("
+          formatter = htmlwidgets::JS(
+            "
             function(params) {
               return params.name + '<br/>' + 
                      'Rate: ' + params.value.toFixed(1) + ' per 100K';
             }
-          ")
+          "
+          )
         ) |>
         echarts4r::e_toolbox_feature(feature = "saveAsImage")
     })
-    
+
     # Trend chart
     output$trend_chart <- echarts4r::renderEcharts4r({
       data <- time_series_data()
-      
+
       data |>
         dplyr::group_by(state) |>
         echarts4r::e_charts(year) |>
@@ -204,20 +229,30 @@ geography_server <- function(id) {
         ) |>
         echarts4r::e_toolbox_feature(feature = "saveAsImage")
     })
-    
+
     # Regional chart
     output$regional_chart <- echarts4r::renderEcharts4r({
       regions <- data.frame(
-        region = c("Northeast", "Mid-Atlantic", "Upper Midwest", 
-                  "Southeast", "West"),
+        region = c(
+          "Northeast",
+          "Mid-Atlantic",
+          "Upper Midwest",
+          "Southeast",
+          "West"
+        ),
         cases = c(180000, 150000, 95000, 25000, 12000),
         growth = c(15, 18, 45, 35, 60)
       )
-      
+
       regions |>
         echarts4r::e_charts(region) |>
         echarts4r::e_bar(cases, name = "Current Cases", y_index = 0) |>
-        echarts4r::e_line(growth, name = "% Growth (10yr)", y_index = 1, symbolSize = 10) |>
+        echarts4r::e_line(
+          growth,
+          name = "% Growth (10yr)",
+          y_index = 1,
+          symbolSize = 10
+        ) |>
         echarts4r::e_color(lyme_palette[c(1, 5)]) |>
         echarts4r::e_title(
           text = "Regional Case Distribution & Growth",
@@ -240,9 +275,9 @@ geography_server <- function(id) {
         ) |>
         echarts4r::e_toolbox_feature(feature = "saveAsImage")
     })
-    
+
     # ------ OBSERVERS ---------------------------------------------------------
-    
+
     # Navigate to Climate tab when button clicked
     observeEvent(input$explore_climate, {
       updateNavbarPage(
@@ -251,9 +286,9 @@ geography_server <- function(id) {
         selected = "Climate & Risk Factors"
       )
     })
-    
+
     # ------ RETURN VALUES -----------------------------------------------------
-    
+
     return(list(
       state_data = state_data,
       time_series = time_series_data

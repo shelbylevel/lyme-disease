@@ -11,63 +11,50 @@ geography_ui <- function(id) {
   ns <- NS(id)
 
   bslib::layout_sidebar(
-    #   # Sidebar for controls
-    #   sidebar = bslib::sidebar(
-    #     title = "Map Controls",
-    #     width = 300,
+    # Sidebar for controls
+    sidebar = bslib::sidebar(
+      title = "Map Options",
+      width = 300,
 
-    #     selectInput(
-    #       ns("year"),
-    #       "Select Year:",
-    #       choices = 2010:2023,
-    #       selected = 2023
-    #     ),
+      selectInput(
+        ns("geography"),
+        "Geography of Interest:",
+        choices = available_geos,
+        selected = available_geos[1]
+      ),
 
-    #     selectInput(
-    #       ns("metric"),
-    #       "Display Metric:",
-    #       choices = c(
-    #         "Total Cases" = "total_cases",
-    #         "Cases per 100,000" = "rate",
-    #         "Year-over-Year Change" = "change"
-    #       ),
-    #       selected = "rate"
-    #     ),
+      selectInput(
+        ns("geo_level"),
+        "By State or County:",
+        choices = c("State", "County"),
+        selected = "County"
+      ),
 
-    #     hr(),
+      selectInput(
+        ns("year"),
+        "Select Year:",
+        choices = available_years,
+        selected = available_years[length(available_years)]
+      ),
 
-    #     h6("Endemic States", class = "fw-bold"),
-    #     p(
-    #       "States with historically high Lyme disease incidence:",
-    #       class = "small text-muted"
-    #     ),
-    #     tags$ul(
-    #       class = "small",
-    #       tags$li("Connecticut"),
-    #       tags$li("Delaware"),
-    #       tags$li("Maine"),
-    #       tags$li("Maryland"),
-    #       tags$li("Massachusetts"),
-    #       tags$li("Minnesota"),
-    #       tags$li("New Hampshire"),
-    #       tags$li("New Jersey"),
-    #       tags$li("New York"),
-    #       tags$li("Pennsylvania"),
-    #       tags$li("Rhode Island"),
-    #       tags$li("Vermont"),
-    #       tags$li("Virginia"),
-    #       tags$li("Wisconsin")
-    #     ),
+      selectInput(
+        ns("metric"),
+        "Display Metric:",
+        choices = c(
+          "Total Cases" = "total_cases",
+          "Cases per 100,000" = "rate"
+          # "Year-over-Year Change" = "change"
+        ),
+        selected = "total_cases"
+      ),
 
-    #     hr(),
-
-    #     actionButton(
-    #       ns("play_animation"),
-    #       "Play Time Animation",
-    #       icon = icon("play"),
-    #       class = "btn-primary w-100"
-    #     )
-    #   ),
+      # actionButton(
+      #   ns("play_animation"),
+      #   "Play Time Animation",
+      #   icon = icon("play"),
+      #   class = "btn-primary w-100"
+      # )
+    ),
 
     # Main content area
     bslib::layout_column_wrap(
@@ -89,9 +76,10 @@ geography_ui <- function(id) {
       bslib::card(
         full_screen = TRUE,
         bslib::card_header("US Map: Lyme Disease Cases by State"),
-        # bslib::card_body(
-        #   echarts4r::echarts4rOutput(ns("us_map"), height = "550px")
-        # ),
+        bslib::card_body(
+          highchartOutput(ns("us_map"), height = "550px") %>%
+            shinycssloaders::withSpinner(color = "#254D56")
+        ),
         # bslib::card_footer(
         #   class = "text-muted small",
         #   icon("info-circle"),
