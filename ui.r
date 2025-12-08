@@ -11,13 +11,14 @@ bslib::page_navbar(
 
   # Set theme with Lyme disease colors
   theme = bslib::bs_theme(
-    version = 5,
-    primary = "#2E7D32",
-    success = "#66BB6A",
-    danger = "#EF5350",
-    warning = "#FFA726",
-    bg = "#FFFFFF",
-    fg = "#1B1B1B"
+    brand = "www/sl-brand.yml"
+    # version = 5,
+    # primary = "#727E70",
+    # success = "#b2c5b4",
+    # danger = "#59224A",
+    # warning = "#FFA726",
+    # bg = "#FFFFFF",
+    # fg = "#1B1B1B"
   ),
 
   # ------ Custom CSS ------------------------------------------------------------
@@ -134,7 +135,7 @@ bslib::page_navbar(
 
   # ------ Tab 3: Geographic Distribution ---------------------------------------
   bslib::nav_panel(
-    title = "Geographic Distribution",
+    title = "Geographic Distribution in the US",
     icon = icon("map-location-dot"),
     geography_ui("geography")
   ),

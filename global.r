@@ -8,13 +8,8 @@
 library(shiny)
 library(bslib)
 library(data.table)
-library(echarts4r)
-library(echarts4r.maps)
 library(highcharter)
-library(dplyr)
-library(sf) # For spatial data
-library(tigris) # For US state boundaries
-library(scrollytell) # For scrollytelling features
+library(tidyverse)
 
 # ------ Set R Options ---------------------------------------------------------
 options(
@@ -41,35 +36,117 @@ lyme_palette <- c(
 # ------ Load Data -------------------------------------------------------------
 # In production, load actual Lyme disease data here
 # Example data structure you might use:
-map_data <- get_data_from_map(download_map_data("countries/us/us-all-all"))
+# map_data <- get_data_from_map(download_map_data("countries/us/us-all-all"))
 
-# map_data <- tigris::counties(
-#   cb = TRUE, #clip boundaries
-#   year = 2020
-# ) %>%
-#   select(STATEFP, COUNTYFP, GEOID)
+# Load US county geometries for mapping
+map_geom <- tigris::counties(
+  cb = TRUE, #clip boundaries
+  year = 2020
+) %>%
+  tigris::shift_geometry() %>% # move AK and HI
+  filter(as.numeric(STATEFP) < 57) %>% # Keep only 50 states & DC
+  geojsonio::geojson_list() # convert to list for highcharter
 
-lyme_cases <- fread("data/ld-case-counts-cty-2001-2023.csv") %>%
-  janitor::clean_names() %>%
+# Load population estimates for rate calculations
+
+# For 2001-2009: Download intercensal estimates directly
+pop_2001_2009 <- readr::read_csv(
+  "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-tot.csv"
+) %>%
+  filter(SUMLEV == "50") %>% # county level only
+  mutate(
+    GEOID = paste0(
+      str_pad(STATE, 2, "left", "0"),
+      str_pad(COUNTY, 3, "left", "0")
+    )
+  ) %>%
+  select(GEOID, POPESTIMATE2001:POPESTIMATE2009) %>%
   tidyr::pivot_longer(
+    cols = starts_with("POPESTIMATE"),
+    names_to = "year",
+    values_to = "pop"
+  ) %>%
+  mutate(
+    year = as.numeric(str_extract(year, "\\d{4}")),
+  ) %>%
+  select(GEOID, year, pop)
+
+# For 2010-2019: Use tidycensus time series 2019 vintage estimates
+# (to access Population Estimates Program (PEP) datasets)
+pop_2010_2019 <- tidycensus::get_estimates(
+  geography = "county",
+  product = "population",
+  time_series = TRUE,
+  vintage = 2019
+) %>%
+  filter(
+    !DATE %in% c(1, 2), # exclude 2010 count & baseline
+    variable == "POP"
+  ) %>%
+  mutate(year = DATE + 2007) %>% # DATE 3 = 2010, so add 2007
+  select(GEOID, year, pop = value)
+
+#alternative in case of Census error
+# pop_2010_2019 <- censusapi::getCensus(
+#   name = "pep/population",
+#   vintage = 2019,
+#   vars = c("POP", "DATE_CODE"),
+#   region = "county:*"
+# ) %>%
+#   mutate(
+#     GEOID = paste0(
+#       str_pad(state, 2, pad = "0"),
+#       str_pad(county, 3, pad = "0")
+#     )
+#   ) %>%
+#   filter(!DATE_CODE %in% c(1, 2)) %>% # exclude 2010 count & baseline
+#   mutate(year = DATE_CODE + 2007) %>% # DATE 3 = 2010, so add 2007
+#   select(GEOID, year, pop = POP)
+
+# For 2020-2023: Use tidycensus time series 2024 vintage estimates
+# (to access Population Estimates Program (PEP) datasets)
+pop_2020_2023 <- tidycensus::get_estimates(
+  geography = "county",
+  product = "population",
+  time_series = TRUE,
+  vintage = 2024,
+  geometry = TRUE
+) %>%
+  filter(
+    variable == "POPESTIMATE",
+    year != 2024
+  ) %>%
+  select(GEOID, year, pop = value)
+
+pop_est <- bind_rows(pop_2001_2009, pop_2010_2019, pop_2020_2023)
+
+# Load Lyme disease case data
+lyme_data <- fread("data/ld-case-counts-cty-2001-2023.csv") %>%
+  janitor::clean_names() %>%
+  pivot_longer(
     cols = starts_with("cases"),
     names_to = "year",
     names_prefix = "cases",
     values_to = "cases"
   ) %>%
   mutate(
-    ctyname = stringr::str_remove(ctyname, " County"),
-    fips = sprintf("%02d%03d", stcode, ctycode)
+    ctyname = str_remove(ctyname, " County"),
+    GEOID = sprintf("%02d%03d", stcode, ctycode),
+    year = as.numeric(year)
+  ) %>%
+  left_join(pop_est, by = c("GEOID", "year")) %>%
+  mutate(
+    rate = ifelse(cases > 0, (as.numeric(cases) / pop) * 100000, 0)
   )
 
-available_years <- lyme_cases %>%
+available_years <- lyme_data %>%
   distinct(year) %>%
   pull(year) %>%
   as.numeric()
 
 available_geos <- c(
   "United States",
-  lyme_cases %>%
+  lyme_data %>%
     distinct(stname) %>%
     pull(stname)
 )

@@ -19,7 +19,7 @@ education_ui <- function(id) {
         class = "p-4 text-center bg-light",
         h2("What is Lyme Disease?", class = "mb-2"),
         p(
-          class = "text-muted mb-0",
+          class = "text-muted mb-1",
           "Understanding America's most common vector-borne disease"
         )
       ),
@@ -33,6 +33,24 @@ education_ui <- function(id) {
         )
       )
     ),
+
+    # Lyme Disease Over Time --------------------------------------------------
+    # bslib::card(
+    #   full_screen = TRUE,
+    #   bslib::card_body(
+    #     highchartOutput(ns("us_map"), height = "550px") %>%
+    #       shinycssloaders::withSpinner(type = 7, color = "#254D56")
+    #   ),
+    #   card_footer(
+    #     "Source: ",
+    #     popover(
+    #       a("CDC (2024)", href = "#"),
+    #       markdown(
+    #         "Centers for Disease Control and Prevention. (2025). *Lyme Disease Case Maps*. [https://www.cdc.gov/lyme/data-research/facts-stats/lyme-disease-case-map.html](https://www.cdc.gov/lyme/data-research/facts-stats/lyme-disease-case-map.html)"
+    #       )
+    #     )
+    #   )
+    # ),
 
     # Transmission ------------------------------------------------------------
     bslib::card(

@@ -1,0 +1,57 @@
+meta:
+  name: shelbylevel
+  link: https://www.shelbylevel.org
+
+color:
+  palette:
+    deep_jade: "#254D56"
+    faded_jade: "#45767a"
+    faded_jade_50: "#a2bbbd"
+    faded_jade_10: "#ecf1f2"
+    gulfstream: "#7fa6ad"
+    edgewater: "#d3dfdd"
+    edgewater_20: "#dce5e4"
+    cascade: "#b3c2c9"
+    boulder: "#727E70"
+    spring_rain: "#b2c5b4"
+    timberwolf: "#D8D5CE"
+    timberwolf_50: "#eceae7"
+    almond_dust: "#B8AEA8"
+    moonstone: "#969996"
+    storm_cloud: "#64635E"
+    plum_crazy: "#59224A"
+  
+  foreground: "#000000"         # main text color
+  background: "#ffffff"         # background
+  primary: "#45767a"            # primary brand color
+  secondary: "#7fa6ad"          # secondary accent
+  tertiary: "#a2bbbd"           # tertiary accent
+  success: "#727E70"            # success states
+  info: "#b2c5b4"               # info messages
+  warning: "#B8AEA8"            # warnings
+  danger: "#59224A"             # errors/danger
+  light: "#ecf1f2"              # light backgrounds
+  dark: "#64635E"               # dark elements
+
+typography:
+  fonts:
+    - family: "Lato"
+      source: google
+      weight: [200, 300, 400, 600]
+    - family: "Nunito Sans"
+      source: google
+      weight: [400, 600]
+  
+  base:
+    family: "Lato"
+    size: "1rem"
+    line-height: 1.6
+    weight: 300
+    color: foreground
+  
+  headings:
+    family: "Nunito Sans"
+    style: normal
+    weight: 600
+    line-height: 1.2
+    color: primary

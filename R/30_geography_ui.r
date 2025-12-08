@@ -15,6 +15,7 @@ geography_ui <- function(id) {
     sidebar = bslib::sidebar(
       title = "Map Options",
       width = 300,
+      open = TRUE,
 
       selectInput(
         ns("geography"),
@@ -30,23 +31,26 @@ geography_ui <- function(id) {
         selected = "County"
       ),
 
-      selectInput(
+      sliderInput(
         ns("year"),
         "Select Year:",
-        choices = available_years,
-        selected = available_years[length(available_years)]
+        min = min(available_years, na.rm = TRUE),
+        max = max(available_years, na.rm = TRUE),
+        value = max(available_years, na.rm = TRUE),
+        step = 1,
+        sep = "" # removes thousands separator for years
       ),
 
-      selectInput(
-        ns("metric"),
-        "Display Metric:",
-        choices = c(
-          "Total Cases" = "total_cases",
-          "Cases per 100,000" = "rate"
-          # "Year-over-Year Change" = "change"
-        ),
-        selected = "total_cases"
-      ),
+      # selectInput(
+      #   ns("metric"),
+      #   "Display Metric:",
+      #   choices = c(
+      #     "Total Cases" = "total_cases",
+      #     "Cases per 100,000 Population" = "rate"
+      #     # "Year-over-Year Change" = "change"
+      #   ),
+      #   selected = "rate"
+      # ),
 
       # actionButton(
       #   ns("play_animation"),
@@ -63,11 +67,11 @@ geography_ui <- function(id) {
       # Page header
       bslib::card(
         bslib::card_body(
-          class = "p-3",
+          class = "p-3 bg-light",
           h2("Where Does Lyme Disease Occur?", class = "mb-1"),
           p(
             "Visualizing the spread of Lyme disease across the United States",
-            class = "text-muted mb-0"
+            class = "text-muted mb-1"
           )
         )
       ),
@@ -75,11 +79,20 @@ geography_ui <- function(id) {
       # Map visualization
       bslib::card(
         full_screen = TRUE,
-        bslib::card_header("US Map: Lyme Disease Cases by State"),
+        # bslib::card_header(paste("Lyme Disease Cases in", input$year)),
         bslib::card_body(
           highchartOutput(ns("us_map"), height = "550px") %>%
-            shinycssloaders::withSpinner(color = "#254D56")
+            shinycssloaders::withSpinner(type = 7, color = "#254D56")
         ),
+        card_footer(
+          "Source: ",
+          popover(
+            a("CDC (2024)", href = "#"),
+            markdown(
+              "Centers for Disease Control and Prevention. (2025). *Lyme Disease Case Maps*. [https://www.cdc.gov/lyme/data-research/facts-stats/lyme-disease-case-map.html](https://www.cdc.gov/lyme/data-research/facts-stats/lyme-disease-case-map.html)"
+            )
+          )
+        )
         # bslib::card_footer(
         #   class = "text-muted small",
         #   icon("info-circle"),
