@@ -13,14 +13,26 @@ education_server <- function(id) {
 
     # ------ REACTIVE ----------------------------------------------------------
 
+    cases <- reactive({
+      lyme_data %>%
+        group_by(year) %>%
+        summarize(total_cases = sum(cases, na.rm = TRUE))
+    })
+
+    rates <- reactive({
+      lyme_data %>%
+        left_join(pop_est, by = c("GEOID", "year")) %>%
+        mutate(rate = (cases / pop) * 100000) %>%
+        group_by(year) %>%
+        summarize(avg_rate = mean(rate, na.rm = TRUE))
+    })
+
     # ------ OUTPUT ------------------------------------------------------------
 
-    # output$cases_time_series <- renderHighchart({
+    # output$time_series <- renderHighchart({
     #   highchart() %>%
     #     hc_add_series(
-    #       data = lyme_data %>%
-    #         group_by(year) %>%
-    #         summarize(total_cases = sum(cases, na.rm = TRUE)),
+    #       data = plot_data(),
     #       type = "line",
     #       hcaes(x = year, y = total_cases),
     #       name = "Total Lyme Disease Cases"

@@ -39,13 +39,20 @@ lyme_palette <- c(
 # map_data <- get_data_from_map(download_map_data("countries/us/us-all-all"))
 
 # Load US county geometries for mapping
-map_geom <- tigris::counties(
+cty_geom <- tigris::counties(
   cb = TRUE, #clip boundaries
   year = 2020
 ) %>%
   tigris::shift_geometry() %>% # move AK and HI
-  filter(as.numeric(STATEFP) < 57) %>% # Keep only 50 states & DC
-  geojsonio::geojson_list() # convert to list for highcharter
+  filter(as.numeric(STATEFP) < 57) # Keep only 50 states & DC
+
+# Load US state geometries for mapping
+state_geom <- tigris::states(
+  cb = TRUE, #clip boundaries
+  year = 2020
+) %>%
+  tigris::shift_geometry() %>% # move AK and HI
+  filter(as.numeric(STATEFP) < 57) # Keep only 50 states & DC
 
 # Load population estimates for rate calculations
 
@@ -53,11 +60,15 @@ map_geom <- tigris::counties(
 pop_2001_2009 <- readr::read_csv(
   "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-tot.csv"
 ) %>%
-  filter(SUMLEV == "50") %>% # county level only
+  filter(SUMLEV %in% c("40", "50")) %>% # state & county level
   mutate(
-    GEOID = paste0(
-      str_pad(STATE, 2, "left", "0"),
-      str_pad(COUNTY, 3, "left", "0")
+    GEOID = if_else(
+      SUMLEV == "40",
+      str_pad(STATE, 2, pad = "0"), # state-level: two-digit STATE code
+      paste0(
+        str_pad(STATE, 2, pad = "0"),
+        str_pad(COUNTY, 3, pad = "0")
+      ) # county-level: two-digit STATE + three-digit COUNTY
     )
   ) %>%
   select(GEOID, POPESTIMATE2001:POPESTIMATE2009) %>%
@@ -73,12 +84,21 @@ pop_2001_2009 <- readr::read_csv(
 
 # For 2010-2019: Use tidycensus time series 2019 vintage estimates
 # (to access Population Estimates Program (PEP) datasets)
-pop_2010_2019 <- tidycensus::get_estimates(
+pop_cty_2010_2019 <- tidycensus::get_estimates(
   geography = "county",
   product = "population",
   time_series = TRUE,
   vintage = 2019
-) %>%
+)
+
+pop_state_2010_2019 <- tidycensus::get_estimates(
+  geography = "state",
+  product = "population",
+  time_series = TRUE,
+  vintage = 2019
+)
+
+pop_2010_2019 <- bind_rows(pop_cty_2010_2019, pop_state_2010_2019) %>%
   filter(
     !DATE %in% c(1, 2), # exclude 2010 count & baseline
     variable == "POP"
@@ -105,13 +125,21 @@ pop_2010_2019 <- tidycensus::get_estimates(
 
 # For 2020-2023: Use tidycensus time series 2024 vintage estimates
 # (to access Population Estimates Program (PEP) datasets)
-pop_2020_2023 <- tidycensus::get_estimates(
+pop_cty_2020_2023 <- tidycensus::get_estimates(
   geography = "county",
   product = "population",
   time_series = TRUE,
-  vintage = 2024,
-  geometry = TRUE
-) %>%
+  vintage = 2024
+)
+
+pop_state_2020_2023 <- tidycensus::get_estimates(
+  geography = "state",
+  product = "population",
+  time_series = TRUE,
+  vintage = 2024
+)
+
+pop_2020_2023 <- bind_rows(pop_cty_2020_2023, pop_state_2020_2023) %>%
   filter(
     variable == "POPESTIMATE",
     year != 2024
@@ -121,7 +149,7 @@ pop_2020_2023 <- tidycensus::get_estimates(
 pop_est <- bind_rows(pop_2001_2009, pop_2010_2019, pop_2020_2023)
 
 # Load Lyme disease case data
-lyme_data <- fread("data/ld-case-counts-cty-2001-2023.csv") %>%
+lyme_cty <- fread("data/ld-case-counts-cty-2001-2023.csv") %>%
   janitor::clean_names() %>%
   pivot_longer(
     cols = starts_with("cases"),
@@ -134,10 +162,23 @@ lyme_data <- fread("data/ld-case-counts-cty-2001-2023.csv") %>%
     GEOID = sprintf("%02d%03d", stcode, ctycode),
     year = as.numeric(year)
   ) %>%
+  select(-ctycode)
+
+lyme_state <- lyme_cty %>%
+  group_by(stcode, stname, year, ststatus) %>%
+  summarize(cases = sum(as.numeric(cases), na.rm = TRUE), .groups = "drop") %>%
+  mutate(
+    GEOID = sprintf("%02d", stcode),
+    year = as.numeric(year),
+    ctyname = NA
+  )
+
+lyme_data <- rbind(lyme_cty, lyme_state) %>%
   left_join(pop_est, by = c("GEOID", "year")) %>%
   mutate(
     rate = ifelse(cases > 0, (as.numeric(cases) / pop) * 100000, 0)
-  )
+  ) %>%
+  select(-stcode)
 
 available_years <- lyme_data %>%
   distinct(year) %>%

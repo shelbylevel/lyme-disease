@@ -21,18 +21,12 @@ geography_server <- function(id) {
           filter(stname == input$geography)
       }
 
-      if (input$geo_level == "State") {
-        # Aggregate to state level
+      if (input$geo_level == "County") {
         filtered_data <- filtered_data %>%
-          group_by(stcode, stname, year) %>%
-          summarise(
-            cases = sum(as.numeric(cases), na.rm = TRUE),
-            .groups = "drop"
-          ) %>%
-          mutate(
-            fips = sprintf("%02d", stcode),
-            ctyname = stname
-          )
+          filter(nchar(GEOID) == 5)
+      } else if (input$geo_level == "State") {
+        filtered_data <- filtered_data %>%
+          filter(nchar(GEOID) == 2)
       }
 
       filtered_data %>%
@@ -40,7 +34,27 @@ geography_server <- function(id) {
         mutate(cases = as.numeric(cases))
     })
 
-    # })
+    map_geom <- reactive({
+      if (input$geo_level == "State") {
+        if (input$geography != "United States") {
+          geom <- state_geom %>%
+            filter(NAME == input$geography)
+        } else {
+          geom <- state_geom
+        }
+      } else if (input$geo_level == "County") {
+        if (input$geography != "United States") {
+          geom <- cty_geom %>%
+            filter(STATE_NAME == input$geography)
+        } else {
+          geom <- cty_geom
+        }
+      }
+
+      # convert to list for highcharter
+      geom %>%
+        geojsonio::geojson_list()
+    })
 
     # ------ OUTPUT ------------------------------------------------------------
 
@@ -63,10 +77,16 @@ geography_server <- function(id) {
 
       # hcmap("countries/us/us-all-all")
 
+      tooltip_header <- if (input$geo_level == "State") {
+        "return ('<b>State</b>: ' + this.point.stname +"
+      } else if (input$geo_level == "County") {
+        "return ('<b>County</b>: ' + this.point.ctyname +"
+      }
+
       # Create the county map
       highchart() %>%
         hc_add_series_map(
-          map = map_geom,
+          map = map_geom(),
           df = map_data(),
           value = "rate",
           joinBy = "GEOID",
@@ -76,11 +96,13 @@ geography_server <- function(id) {
         hc_mapNavigation(enabled = TRUE) %>%
         hc_tooltip(
           formatter = JS(
-            "function(){
-            return ('<b>County</b>: ' + this.point.ctyname +
-              ' <br> <b>Rate</b>: ' + Highcharts.numberFormat(this.point.value, 2, '.', ',') +
-              ' <br> <b>Cases</b>: ' + Highcharts.numberFormat(this.point.cases, 0, '.', ','));
-            }"
+            paste0(
+              "function(){",
+              tooltip_header,
+              "' <br> <b>Rate</b>: ' + Highcharts.numberFormat(this.point.value, 2, '.', ',') +
+                ' <br> <b>Cases</b>: ' + Highcharts.numberFormat(this.point.cases, 0, '.', ','));
+              }"
+            )
           )
         ) %>%
         hc_legend(

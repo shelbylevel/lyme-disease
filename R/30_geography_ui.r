@@ -26,7 +26,7 @@ geography_ui <- function(id) {
 
       selectInput(
         ns("geo_level"),
-        "By State or County:",
+        "Geography Level:",
         choices = c("State", "County"),
         selected = "County"
       ),
