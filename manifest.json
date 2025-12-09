@@ -5814,13 +5814,16 @@
   },
   "files": {
     ".Rprofile": {
-      "checksum": "83d81ee78dee0ec130297536acea4e6e"
+      "checksum": "d6fb30f738ecf2a2299e14e997af0575"
+    },
+    "data/intercensal-pop-est-2000-2010.csv": {
+      "checksum": "f48b8236d9041b929c4b7464afb7272e"
     },
     "data/ld-case-counts-cty-2001-2023.csv": {
       "checksum": "3940d761f6e55657c3764e440c82d9e9"
     },
     "global.r": {
-      "checksum": "b7d9ea8d8e4df1d4fe4ef76f3523ae6a"
+      "checksum": "ab3813089392a814d10cb73929ac73b6"
     },
     "R/10_home_server.r": {
       "checksum": "53b1da9150572234dfdfdbb1eeafde2f"

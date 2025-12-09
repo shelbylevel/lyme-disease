@@ -57,9 +57,10 @@ state_geom <- tigris::states(
 # Load population estimates for rate calculations
 
 # For 2001-2009: Download intercensal estimates directly
-pop_2001_2009 <- readr::read_csv(
-  "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-tot.csv"
-) %>%
+pop_2001_2009 <- fread("data/intercensal-pop-est-2000-2010.csv") %>%
+  #   readr::read_csv(
+  #   "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-tot.csv"
+  # ) %>%
   filter(SUMLEV %in% c("40", "50")) %>% # state & county level
   mutate(
     GEOID = if_else(
