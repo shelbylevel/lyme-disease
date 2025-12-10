@@ -5,7 +5,7 @@
 # This file contains the user interface structure
 
 bslib::page_navbar(
-  title = "Lyme Disease & Climate Dashboard",
+  title = "Lyme Disease in the United States",
   id = "main_nav",
   #fillable = TRUE, # Makes pages fill the viewport height
 
@@ -120,11 +120,11 @@ bslib::page_navbar(
   # includeCSS("www/css/main.min.css"),
 
   # ------ Tab 1: Overview -------------------------------------------------------
-  # bslib::nav_panel(
-  #   title = "Overview",
-  #   icon = icon("house"),
-  #   home_ui("home")
-  # ),
+  bslib::nav_panel(
+    title = "Home",
+    icon = icon("house"),
+    home_ui("home")
+  ),
 
   # ------ Tab 2: Lyme Disease 101 ----------------------------------------------
   bslib::nav_panel(
@@ -135,7 +135,7 @@ bslib::page_navbar(
 
   # ------ Tab 3: Geographic Distribution ---------------------------------------
   bslib::nav_panel(
-    title = "Geographic Distribution in the US",
+    title = "Geographic Distribution",
     icon = icon("map-location-dot"),
     geography_ui("geography")
   ),

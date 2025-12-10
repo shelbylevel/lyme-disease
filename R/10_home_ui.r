@@ -17,14 +17,34 @@ home_ui <- function(id) {
     # Page header with key message
     bslib::card(
       bslib::card_body(
-        class = "p-4 text-center",
+        class = "p-4 text-center bg-light",
         h1(
-          "Lyme Disease & Climate Change in the United States",
+          "Lyme Disease in the United States",
           class = "mb-3"
         ),
         h4(
           "Understanding the expanding threat of tick-borne illness",
           class = "text-muted fw-normal mb-0"
+        )
+      )
+    ),
+
+    bslib::card(
+      bslib::card_body(
+        class = "p-4 text-center bg-light",
+        h2("Why Lyme Disease?", class = "mb-2"),
+        p(
+          class = "text-muted mb-1",
+          "Understanding America's most common vector-borne disease"
+        )
+      ),
+      bslib::card_body(
+        p(
+          class = "lead text-center",
+          style = "margin-top: 10px;",
+          "Lyme disease is a bacterial disease transmitted by the bite of an infected tick. 
+          The primary bacterium that causes Lyme disease is ",
+          tags$em("Borrelia burgdorferi")
         )
       )
     ),
@@ -36,23 +56,33 @@ home_ui <- function(id) {
       bslib::value_box(
         title = "Annual US Cases",
         value = "~476,000",
-        showcase = icon("virus"),
+        showcase = icon("bug"),
         theme = "danger",
         p("Estimated cases per year", class = "fs-6")
       ),
       bslib::value_box(
-        title = "High-Risk States",
-        value = "14+",
+        title = "High Incidence States",
+        value = lyme_data %>%
+          filter(
+            (nchar(GEOID) == 2),
+            ststatus == "High Incidence",
+            year == 2023
+          ) %>%
+          count() %>%
+          pull(n),
         showcase = icon("map-marked-alt"),
         theme = "warning",
         p("States with endemic Lyme", class = "fs-6")
       ),
       bslib::value_box(
         title = "Geographic Expansion",
-        value = "↑ 320%",
+        value = paste0("↑ ", round(cty_incr_since_2001, 1), "%"),
         showcase = icon("arrow-trend-up"),
+        # showcase = highchartOutput(ns("cty_expansion"), height = "60px"),
+        # showcase_layout = "bottom",
+        # full_screen = TRUE,
         theme = "primary",
-        p("County increase since 1996", class = "fs-6")
+        p("County increase since 2001", class = "fs-6")
       ),
       bslib::value_box(
         title = "Climate Impact",
@@ -60,6 +90,23 @@ home_ui <- function(id) {
         showcase = icon("temperature-high"),
         theme = "info",
         p("Warming extends tick season", class = "fs-6")
+      )
+    ),
+
+    # Time series chart
+    bslib::card(
+      bslib::card_header("Lyme Disease Cases and Incidence Over Time"),
+      bslib::card_body(
+        highchartOutput(ns("time_series"), height = "350px")
+      ),
+      card_footer(
+        "Source: ",
+        popover(
+          a("CDC (2025)", href = "#"),
+          markdown(
+            "Centers for Disease Control and Prevention. (2025). *Lyme Disease Surveillance Data*. [https://www.cdc.gov/lyme/data-research/facts-stats/surveillance-data-1.html](https://www.cdc.gov/lyme/data-research/facts-stats/surveillance-data-1.html)"
+          )
+        )
       )
     ),
 

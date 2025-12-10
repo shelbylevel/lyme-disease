@@ -17,26 +17,10 @@ options(
   tigris_use_cache = TRUE
 )
 
-# ------ Global Variables ------------------------------------------------------
-# Define constants used throughout the app
-current_year <- as.numeric(format(Sys.Date(), "%Y"))
-
-# Lyme disease color palette (greens and earth tones)
-lyme_palette <- c(
-  "#2E7D32", # Dark green (primary)
-  "#66BB6A", # Medium green
-  "#A5D6A7", # Light green
-  "#8D6E63", # Brown (ticks)
-  "#FFA726", # Orange (warning)
-  "#EF5350", # Red (high risk)
-  "#42A5F5", # Blue (water/climate)
-  "#7E57C2" # Purple (accent)
-)
-
 # ------ Load Data -------------------------------------------------------------
-# In production, load actual Lyme disease data here
-# Example data structure you might use:
-# map_data <- get_data_from_map(download_map_data("countries/us/us-all-all"))
+
+## ------ Geospatial Data -------------------------------------------------------
+# For state & county shapes for mapping
 
 # Load US county geometries for mapping
 cty_geom <- tigris::counties(
@@ -54,7 +38,8 @@ state_geom <- tigris::states(
   tigris::shift_geometry() %>% # move AK and HI
   filter(as.numeric(STATEFP) < 57) # Keep only 50 states & DC
 
-# Load population estimates for rate calculations
+## ------ Population Data  -------------------------------------------------------
+# Population estimates for rate calculations
 
 # For 2001-2009: Download intercensal estimates directly
 pop_2001_2009 <- fread("data/intercensal-pop-est-2000-2010.csv") %>%
@@ -149,7 +134,10 @@ pop_2020_2023 <- bind_rows(pop_cty_2020_2023, pop_state_2020_2023) %>%
 
 pop_est <- bind_rows(pop_2001_2009, pop_2010_2019, pop_2020_2023)
 
-# Load Lyme disease case data
+## ------ Lyme Disease Data -------------------------------------------------------
+
+# Case data downloaded from CDC
+# https://www.cdc.gov/lyme/data-research/facts-stats/lyme-disease-case-map.html
 lyme_cty <- fread("data/ld-case-counts-cty-2001-2023.csv") %>%
   janitor::clean_names() %>%
   pivot_longer(
@@ -177,9 +165,48 @@ lyme_state <- lyme_cty %>%
 lyme_data <- rbind(lyme_cty, lyme_state) %>%
   left_join(pop_est, by = c("GEOID", "year")) %>%
   mutate(
-    rate = ifelse(cases > 0, (as.numeric(cases) / pop) * 100000, 0)
+    rate = ifelse(cases > 0, (as.numeric(cases) / pop) * 100000, 0),
+    ststatus = if_else(ststatus == "High Incidenc", "High Incidence", ststatus) # fix typo in dataset
   ) %>%
   select(-stcode)
+
+# US-level incidence rates downloaded from CDC
+# https://www.cdc.gov/lyme/data-research/facts-stats/surveillance-data-1.html#cdc_data_surveillance_section_2-dashboard-data-files
+lyme_yearly <- fread("data/ld-cases-yearly-1996-2023.csv") %>%
+  janitor::clean_names() %>%
+  rename(rate = incidence)
+
+cty_expansion <- lyme_cty %>%
+  group_by(year) %>%
+  summarize(
+    ctys_w_cases = sum(as.numeric(cases) > 0, na.rm = TRUE)
+  ) %>%
+  mutate(
+    pct_change_since_2001 = 100 *
+      (ctys_w_cases - ctys_w_cases[year == 2001]) /
+      ctys_w_cases[year == 2001]
+  )
+
+cty_incr_since_2001 <- cty_expansion %>%
+  filter(year == max(year, na.rm = TRUE)) %>%
+  pull(pct_change_since_2001)
+
+# ------ Global Variables ------------------------------------------------------
+# Define constants used throughout the app
+
+current_year <- as.numeric(format(Sys.Date(), "%Y"))
+
+# Lyme disease color palette (greens and earth tones)
+lyme_palette <- c(
+  "#2E7D32", # Dark green (primary)
+  "#66BB6A", # Medium green
+  "#A5D6A7", # Light green
+  "#8D6E63", # Brown (ticks)
+  "#FFA726", # Orange (warning)
+  "#EF5350", # Red (high risk)
+  "#42A5F5", # Blue (water/climate)
+  "#7E57C2" # Purple (accent)
+)
 
 available_years <- lyme_data %>%
   distinct(year) %>%
@@ -195,6 +222,3 @@ available_geos <- c(
 
 # climate_data <- fread("data/climate_factors.csv")
 # tick_habitat <- fread("data/tick_habitat_suitability.csv")
-
-# For now, we'll create sample data in the modules
-# When you have real data, load it here so it's available to all users

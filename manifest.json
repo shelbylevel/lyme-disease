@@ -5814,7 +5814,7 @@
   },
   "files": {
     ".Rprofile": {
-      "checksum": "d6fb30f738ecf2a2299e14e997af0575"
+      "checksum": "34b2e8905c148b0c14abea02d57a76de"
     },
     "data/intercensal-pop-est-2000-2010.csv": {
       "checksum": "f48b8236d9041b929c4b7464afb7272e"
@@ -5822,20 +5822,23 @@
     "data/ld-case-counts-cty-2001-2023.csv": {
       "checksum": "3940d761f6e55657c3764e440c82d9e9"
     },
+    "data/ld-cases-yearly-1996-2023.csv": {
+      "checksum": "b44b0a5772b5a66ecef014da6f77b953"
+    },
     "global.r": {
-      "checksum": "ab3813089392a814d10cb73929ac73b6"
+      "checksum": "0a31fc971085c662e41caa7f68d2ec36"
     },
     "R/10_home_server.r": {
-      "checksum": "53b1da9150572234dfdfdbb1eeafde2f"
+      "checksum": "b44e144f54e27196db9b89902a961418"
     },
     "R/10_home_ui.r": {
-      "checksum": "38d5a5a139268757f4247d42b8e512d0"
+      "checksum": "9c808e9c9b7606c516228bd88ad67b88"
     },
     "R/20_education_server.r": {
       "checksum": "da8de5f398f934cc329e2b06571f67eb"
     },
     "R/20_education_ui.r": {
-      "checksum": "efce3df16927c717b6496839eb7a84bf"
+      "checksum": "a9fd0eee78d0facf34ef43255686ca33"
     },
     "R/20_explorer_ui.r": {
       "checksum": "74cb74664a73ccf86575abfca89021b7"
@@ -5847,10 +5850,10 @@
       "checksum": "f7b1980c2467c2e188f909b343fa3d24"
     },
     "R/30_geography_server.r": {
-      "checksum": "be7283512beaf2f241154211f835a2d9"
+      "checksum": "a6183e8aa2266c86de59842b6239c78a"
     },
     "R/30_geography_ui.r": {
-      "checksum": "1152fc4dfe4adeccfe9bcb71f07021ce"
+      "checksum": "17ee16c1b0938f524afcdb0db450001f"
     },
     "R/30_viz_server.r": {
       "checksum": "eb13e04c8b37618836704dc999e43fd4"
@@ -5889,10 +5892,10 @@
       "checksum": "a1dc38ec432e2287d1a058346e9805e0"
     },
     "ui.r": {
-      "checksum": "ee3646f4f6c154bb6b2b5a29070ac072"
+      "checksum": "7a634c1685f98c71b78ac98c081eca2f"
     },
     "www/sl-brand.yml": {
-      "checksum": "f14a7e71548eca3522e74f03a40b5dcd"
+      "checksum": "c1a06635a08b1245350080d02afa5874"
     }
   },
   "users": null

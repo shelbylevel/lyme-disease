@@ -27,7 +27,7 @@ geography_ui <- function(id) {
       selectInput(
         ns("geo_level"),
         "Geography Level:",
-        choices = c("State", "County"),
+        choices = c("County", "State"),
         selected = "County"
       ),
 
@@ -40,17 +40,6 @@ geography_ui <- function(id) {
         step = 1,
         sep = "" # removes thousands separator for years
       ),
-
-      # selectInput(
-      #   ns("metric"),
-      #   "Display Metric:",
-      #   choices = c(
-      #     "Total Cases" = "total_cases",
-      #     "Cases per 100,000 Population" = "rate"
-      #     # "Year-over-Year Change" = "change"
-      #   ),
-      #   selected = "rate"
-      # ),
 
       # actionButton(
       #   ns("play_animation"),
@@ -67,11 +56,11 @@ geography_ui <- function(id) {
       # Page header
       bslib::card(
         bslib::card_body(
-          class = "p-3 bg-light",
-          h2("Where Does Lyme Disease Occur?", class = "mb-1"),
-          p(
+          class = "p-4 bg-light",
+          h2("Where Does Lyme Disease Occur?", class = "mb-3"),
+          h4(
             "Visualizing the spread of Lyme disease across the United States",
-            class = "text-muted mb-1"
+            class = "text-muted fw-normal mb-0"
           )
         )
       ),
@@ -85,11 +74,13 @@ geography_ui <- function(id) {
             shinycssloaders::withSpinner(type = 7, color = "#254D56")
         ),
         card_footer(
-          "Source: ",
+          "Sources: ",
           popover(
-            a("CDC (2024)", href = "#"),
+            a("CDC (2025), U.S. Census Bureau (2025)", href = "#"),
             markdown(
-              "Centers for Disease Control and Prevention. (2025). *Lyme Disease Case Maps*. [https://www.cdc.gov/lyme/data-research/facts-stats/lyme-disease-case-map.html](https://www.cdc.gov/lyme/data-research/facts-stats/lyme-disease-case-map.html)"
+              "Centers for Disease Control and Prevention. (2025). *Lyme Disease Case Maps*. [https://www.cdc.gov/lyme/data-research/facts-stats/lyme-disease-case-map.html](https://www.cdc.gov/lyme/data-research/facts-stats/lyme-disease-case-map.html) <br><br>
+              U.S. Census Bureau. (2025). *Intercensal Population Estimates*. [https://www.census.gov/programs-surveys/popest/technical-documentation/research/intercensal-estimates.html](https://www.census.gov/programs-surveys/popest/technical-documentation/research/intercensal-estimates.html) <br><br>
+              U.S. Census Bureau. (2025). *Population Estimates Program (PEP)*. [https://www.census.gov/programs-surveys/popest/data/tables.html](https://www.census.gov/programs-surveys/popest/data/tables.html)"
             )
           )
         )
@@ -101,58 +92,68 @@ geography_ui <- function(id) {
         # )
       ),
 
-      # Trend over time
+      # Geographic expansion chart
       bslib::card(
-        bslib::card_header("Changes Over Time"),
-        # bslib::card_body(
-        #   echarts4r::echarts4rOutput(ns("trend_chart"), height = "400px")
-        # )
+        full_screen = TRUE,
+        # bslib::card_header(paste("Lyme Disease Cases in", input$year)),
+        bslib::card_body(
+          highchartOutput(ns("geo_expansion"), height = "350px")
+        ),
+        card_footer(
+          "Source: ",
+          popover(
+            a("CDC (2025)", href = "#"),
+            markdown(
+              "Centers for Disease Control and Prevention. (2025). *Lyme Disease Surveillance Data*. [https://www.cdc.gov/lyme/data-research/facts-stats/surveillance-data-1.html](https://www.cdc.gov/lyme/data-research/facts-stats/surveillance-data-1.html)"
+            )
+          )
+        )
       ),
 
       # Key insights
-      # bslib::layout_column_wrap(
-      #   width = 1 / 2,
+      bslib::layout_column_wrap(
+        width = 1 / 2,
 
-      #   bslib::card(
-      #     bslib::card_header("Geographic Expansion"),
-      #     bslib::card_body(
-      #       h5("Key Observations:", class = "text-primary"),
-      #       tags$ul(
-      #         tags$li("Northward expansion from traditional endemic areas"),
-      #         tags$li("Emergence in previously non-endemic Midwestern states"),
-      #         tags$li("Coastal regions show highest concentration"),
-      #         tags$li("Some Western states reporting first confirmed cases")
-      #       )
-      #     )
-      #   ),
+        bslib::card(
+          bslib::card_header("Geographic Expansion"),
+          bslib::card_body(
+            h5("Key Observations:", class = "text-primary"),
+            tags$ul(
+              tags$li("Northward expansion from traditional endemic areas"),
+              tags$li("Emergence in previously non-endemic Midwestern states"),
+              tags$li("Coastal regions show highest concentration"),
+              tags$li("Some Western states reporting first confirmed cases")
+            )
+          )
+        ),
 
-      #   bslib::card(
-      #     bslib::card_header("Regional Patterns"),
-      #     bslib::card_body(
-      #       bslib::value_box(
-      #         title = "Northeast",
-      #         value = "Highest",
-      #         showcase = icon("chart-line"),
-      #         theme = "danger",
-      #         p("Traditional endemic region", class = "fs-6")
-      #       ),
-      #       bslib::value_box(
-      #         title = "Upper Midwest",
-      #         value = "Rising",
-      #         showcase = icon("arrow-trend-up"),
-      #         theme = "warning",
-      #         p("Rapid expansion observed", class = "fs-6")
-      #       ),
-      #       bslib::value_box(
-      #         title = "South & West",
-      #         value = "Emerging",
-      #         showcase = icon("triangle-exclamation"),
-      #         theme = "info",
-      #         p("New cases appearing", class = "fs-6")
-      #       )
-      #     )
-      #   )
-      # )
+        bslib::card(
+          bslib::card_header("Regional Patterns"),
+          bslib::card_body(
+            bslib::value_box(
+              title = "Northeast",
+              value = "Highest",
+              showcase = icon("chart-line"),
+              theme = "danger",
+              p("Traditional endemic region", class = "fs-6")
+            ),
+            bslib::value_box(
+              title = "Upper Midwest",
+              value = "Rising",
+              showcase = icon("arrow-trend-up"),
+              theme = "warning",
+              p("Rapid expansion observed", class = "fs-6")
+            ),
+            bslib::value_box(
+              title = "South & West",
+              value = "Emerging",
+              showcase = icon("triangle-exclamation"),
+              theme = "info",
+              p("New cases appearing", class = "fs-6")
+            )
+          )
+        )
+      )
     )
   )
 }

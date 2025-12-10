@@ -17,9 +17,9 @@ education_ui <- function(id) {
     bslib::card(
       bslib::card_body(
         class = "p-4 text-center bg-light",
-        h2("What is Lyme Disease?", class = "mb-2"),
-        p(
-          class = "text-muted mb-1",
+        h2("What is Lyme Disease?", class = "mb-3"),
+        h4(
+          class = "text-muted fw-normal mb-0",
           "Understanding America's most common vector-borne disease"
         )
       ),
@@ -35,8 +35,10 @@ education_ui <- function(id) {
     ),
 
     # Lyme Disease Over Time --------------------------------------------------
+
     # bslib::card(
     #   full_screen = TRUE,
+    # bslib::card_header("Changes Over Time"),
     #   bslib::card_body(
     #     highchartOutput(ns("time_series"), height = "550px") %>%
     #       shinycssloaders::withSpinner(type = 7, color = "#254D56")
