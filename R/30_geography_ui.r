@@ -90,71 +90,67 @@ geography_ui <- function(id) {
             )
           )
         ),
-        bslib::card(
-          bslib::card_header("Regional Patterns"),
-          bslib::card_body(
-            bslib::value_box(
-              title = "Northeast",
-              value = "Highest",
-              showcase = icon("chart-line"),
-              theme = "danger",
-              p("Traditional endemic region", class = "fs-6")
+        bslib::layout_column_wrap(
+          width = 1,
+          bslib::card(
+            bslib::card_header(
+              class = "bg-primary text-white",
+              "Regional Patterns"
             ),
-            bslib::value_box(
-              title = "Upper Midwest",
-              value = "Rising",
-              showcase = icon("arrow-trend-up"),
-              theme = "warning",
-              p("Rapid expansion observed", class = "fs-6")
+            bslib::card_body(
+              tags$div(
+                style = "margin-bottom: 1em;",
+                icon("chart-line", class = "text-danger"),
+                tags$b("Northeast:"),
+                " Traditional endemic region; highest incidence."
+              ),
+              tags$div(
+                style = "margin-bottom: 1em;",
+                icon("arrow-trend-up", class = "text-warning"),
+                tags$b("Upper Midwest:"),
+                " Rapid expansion observed in recent years."
+              ),
+              tags$div(
+                style = "margin-bottom: 1em;",
+                icon("triangle-exclamation", class = "text-info"),
+                tags$b("South & West:"),
+                " New cases appearing in previously unaffected areas."
+              )
+            )
+          ),
+          # Key insights
+          bslib::card(
+            bslib::card_header(
+              class = "bg-danger text-white",
+              "Geographic Expansion"
             ),
-            bslib::value_box(
-              title = "South & West",
-              value = "Emerging",
-              showcase = icon("triangle-exclamation"),
-              theme = "info",
-              p("New cases appearing", class = "fs-6")
+            bslib::card_body(
+              tags$ul(
+                tags$li("Northward expansion from traditional endemic areas"),
+                tags$li(
+                  "Emergence in previously non-endemic Midwestern states"
+                ),
+                tags$li("Coastal regions show highest concentration"),
+                tags$li("Western states reporting first confirmed cases")
+              )
             )
           )
         )
-        # bslib::card_footer(
-        #   class = "text-muted small",
-        #   icon("info-circle"),
-        #   " Click on states to see detailed information. Data shown is simulated for
-        #   demonstration purposes."
-        # )
-      )
-    ),
-
-    # Geographic expansion chart
-    bslib::card(
-      full_screen = TRUE,
-      bslib::card_body(
-        highchartOutput(ns("geo_expansion"), height = "350px") %>%
-          shinycssloaders::withSpinner(type = 7, color = "#254D56")
-      ),
-      card_footer(
-        "Source: ",
-        popover(
-          a("CDC (2025)", href = "javascript:void(0);"),
-          markdown(
-            "Centers for Disease Control and Prevention. (2025). *Lyme Disease Surveillance Data*. [https://www.cdc.gov/lyme/data-research/facts-stats/surveillance-data-1.html](https://www.cdc.gov/lyme/data-research/facts-stats/surveillance-data-1.html)"
-          )
-        )
       ),
 
-      # Key insights
-      bslib::layout_column_wrap(
-        width = 1 / 2,
-
-        bslib::card(
-          bslib::card_header("Geographic Expansion"),
-          bslib::card_body(
-            h5("Key Observations:", class = "text-primary"),
-            tags$ul(
-              tags$li("Northward expansion from traditional endemic areas"),
-              tags$li("Emergence in previously non-endemic Midwestern states"),
-              tags$li("Coastal regions show highest concentration"),
-              tags$li("Some Western states reporting first confirmed cases")
+      # Geographic expansion chart
+      bslib::card(
+        full_screen = TRUE,
+        bslib::card_body(
+          highchartOutput(ns("geo_expansion"), height = "350px") %>%
+            shinycssloaders::withSpinner(type = 7, color = "#254D56")
+        ),
+        card_footer(
+          "Source: ",
+          popover(
+            a("CDC (2025)", href = "javascript:void(0);"),
+            markdown(
+              "Centers for Disease Control and Prevention. (2025). *Lyme Disease Surveillance Data*. [https://www.cdc.gov/lyme/data-research/facts-stats/surveillance-data-1.html](https://www.cdc.gov/lyme/data-research/facts-stats/surveillance-data-1.html)"
             )
           )
         )

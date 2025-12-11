@@ -85,6 +85,7 @@ home_ui <- function(id) {
 
     # Time series chart
     bslib::card(
+      full_screen = TRUE,
       bslib::card_body(
         highchartOutput(ns("time_series"), height = "350px")
       ),
@@ -104,6 +105,7 @@ home_ui <- function(id) {
       width = 1 / 2,
 
       bslib::card(
+        full_screen = TRUE,
         bslib::card_header(
           class = "bg-primary text-white",
           "About This Dashboard"
@@ -142,6 +144,7 @@ home_ui <- function(id) {
       ),
 
       bslib::card(
+        full_screen = TRUE,
         bslib::card_header(
           class = "bg-danger text-white",
           "Key Findings"
