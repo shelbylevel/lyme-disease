@@ -72,7 +72,8 @@ geography_ui <- function(id) {
         bslib::card(
           full_screen = TRUE,
           bslib::card_body(
-            highchartOutput(ns("us_map"), height = "550px") %>%
+            plotOutput(ns("us_map"), height = "550px") %>%
+              # highchartOutput(ns("us_map")) %>%
               shinycssloaders::withSpinner(type = 7, color = "#254D56")
           ),
           card_footer(
@@ -142,7 +143,7 @@ geography_ui <- function(id) {
       bslib::card(
         full_screen = TRUE,
         bslib::card_body(
-          highchartOutput(ns("geo_expansion"), height = "350px") %>%
+          highchartOutput(ns("geo_expansion")) %>%
             shinycssloaders::withSpinner(type = 7, color = "#254D56")
         ),
         card_footer(
