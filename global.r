@@ -187,9 +187,18 @@ cty_expansion <- lyme_cty %>%
       ctys_w_cases[year == 2001]
   )
 
+# Calculate values for value boxes
 cty_incr_since_2001 <- cty_expansion %>%
   filter(year == max(year, na.rm = TRUE)) %>%
   pull(pct_change_since_2001)
+
+inc_rate_incr <- lyme_yearly %>%
+  filter(year %in% c(1996, max(year, na.rm = TRUE))) %>%
+  arrange(year) %>%
+  pull(rate) %>%
+  {
+    100 * (.[2] - .[1]) / .[1]
+  }
 
 # ------ Global Variables ------------------------------------------------------
 # Define constants used throughout the app

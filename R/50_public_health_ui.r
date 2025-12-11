@@ -17,10 +17,10 @@ public_health_ui <- function(id) {
     bslib::card(
       bslib::card_body(
         class = "p-4 text-center bg-light",
-        h2("Public Health Implications", class = "mb-2"),
-        p(
+        h2("Public Health Implications", class = "mb-3"),
+        h5(
           "Understanding the healthcare burden of expanding Lyme disease",
-          class = "lead text-muted mb-0"
+          class = "text-muted fw-normal mb-0"
         )
       )
     ),

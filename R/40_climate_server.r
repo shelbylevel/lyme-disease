@@ -1,13 +1,13 @@
 # ==============================================================================
-# CLIMATE & RISK FACTORS MODULE - SERVER
+# CLIMATE & ENVIRONMENTAL RISK FACTORS MODULE - SERVER
 # ==============================================================================
 
-#' Risk Factors Module Server
+#' Climate Module Server
 #'
 #' @param id Module namespace ID
 #'
 #' @return Reactive values from the module
-risk_factors_server <- function(id) {
+climate_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 

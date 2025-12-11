@@ -22,7 +22,7 @@ function(input, output, session) {
   geography_server("geography")
 
   # ------ * Climate & Risk Factors Module -------------------------------------
-  risk_factors_server("risk_factors")
+  climate_server("risk_factors")
 
   # ------ * Public Health Impact Module ---------------------------------------
   public_health_server("public_health")

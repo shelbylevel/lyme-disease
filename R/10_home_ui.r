@@ -26,6 +26,13 @@ home_ui <- function(id) {
           "Understanding the expanding threat of tick-borne illness",
           class = "text-muted fw-normal mb-0"
         )
+      ),
+      bslib::card_body(
+        p(
+          class = "lead text-center",
+          style = "margin-top: 10px;",
+          "The CDC estimates that ~476,000 people may be diagnosed and treated for Lyme disease each year in the United States",
+        )
       )
     ),
 
@@ -34,12 +41,12 @@ home_ui <- function(id) {
       width = 1 / 4,
 
       bslib::value_box(
-        title = "Each Year in the US",
-        value = "~476,000",
+        title = "Higher Incidence Rates",
+        value = paste0("↑ ", round(inc_rate_incr, 1), "%"),
         showcase = icon("bug"),
         theme = "danger",
         p(
-          "people may be diagnosed and treated for Lyme disease",
+          "Incidence increase since 1996",
           class = "fs-6"
         )
       ),
@@ -78,14 +85,13 @@ home_ui <- function(id) {
 
     # Time series chart
     bslib::card(
-      bslib::card_header("Lyme Disease Cases and Incidence Over Time"),
       bslib::card_body(
         highchartOutput(ns("time_series"), height = "350px")
       ),
       card_footer(
         "Source: ",
         popover(
-          a("CDC (2025)", href = "#"),
+          a("CDC (2025)", href = "javascript:void(0);"),
           markdown(
             "Centers for Disease Control and Prevention. (2025). *Lyme Disease Surveillance Data*. [https://www.cdc.gov/lyme/data-research/facts-stats/surveillance-data-1.html](https://www.cdc.gov/lyme/data-research/facts-stats/surveillance-data-1.html)"
           )

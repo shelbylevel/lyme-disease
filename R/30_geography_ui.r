@@ -66,67 +66,30 @@ geography_ui <- function(id) {
       ),
 
       # Map visualization
-      bslib::card(
-        full_screen = TRUE,
-        # bslib::card_header(paste("Lyme Disease Cases in", input$year)),
-        bslib::card_body(
-          highchartOutput(ns("us_map"), height = "550px") %>%
-            shinycssloaders::withSpinner(type = 7, color = "#254D56")
-        ),
-        card_footer(
-          "Sources: ",
-          popover(
-            a("CDC (2025), U.S. Census Bureau (2025)", href = "#"),
-            markdown(
-              "Centers for Disease Control and Prevention. (2025). *Lyme Disease Case Maps*. [https://www.cdc.gov/lyme/data-research/facts-stats/lyme-disease-case-map.html](https://www.cdc.gov/lyme/data-research/facts-stats/lyme-disease-case-map.html) <br><br>
+      bslib::layout_column_wrap(
+        width = NULL,
+        style = css(grid_template_columns = "3fr 1fr"),
+        bslib::card(
+          full_screen = TRUE,
+          bslib::card_body(
+            highchartOutput(ns("us_map"), height = "550px") %>%
+              shinycssloaders::withSpinner(type = 7, color = "#254D56")
+          ),
+          card_footer(
+            "Sources: ",
+            popover(
+              a(
+                "CDC (2025), U.S. Census Bureau (2025)",
+                href = "javascript:void(0);"
+              ),
+              markdown(
+                "Centers for Disease Control and Prevention. (2025). *Lyme Disease Case Maps*. [https://www.cdc.gov/lyme/data-research/facts-stats/lyme-disease-case-map.html](https://www.cdc.gov/lyme/data-research/facts-stats/lyme-disease-case-map.html) <br><br>
               U.S. Census Bureau. (2025). *Intercensal Population Estimates*. [https://www.census.gov/programs-surveys/popest/technical-documentation/research/intercensal-estimates.html](https://www.census.gov/programs-surveys/popest/technical-documentation/research/intercensal-estimates.html) <br><br>
               U.S. Census Bureau. (2025). *Population Estimates Program (PEP)*. [https://www.census.gov/programs-surveys/popest/data/tables.html](https://www.census.gov/programs-surveys/popest/data/tables.html)"
-            )
-          )
-        )
-        # bslib::card_footer(
-        #   class = "text-muted small",
-        #   icon("info-circle"),
-        #   " Click on states to see detailed information. Data shown is simulated for
-        #   demonstration purposes."
-        # )
-      ),
-
-      # Geographic expansion chart
-      bslib::card(
-        full_screen = TRUE,
-        # bslib::card_header(paste("Lyme Disease Cases in", input$year)),
-        bslib::card_body(
-          highchartOutput(ns("geo_expansion"), height = "350px")
-        ),
-        card_footer(
-          "Source: ",
-          popover(
-            a("CDC (2025)", href = "#"),
-            markdown(
-              "Centers for Disease Control and Prevention. (2025). *Lyme Disease Surveillance Data*. [https://www.cdc.gov/lyme/data-research/facts-stats/surveillance-data-1.html](https://www.cdc.gov/lyme/data-research/facts-stats/surveillance-data-1.html)"
-            )
-          )
-        )
-      ),
-
-      # Key insights
-      bslib::layout_column_wrap(
-        width = 1 / 2,
-
-        bslib::card(
-          bslib::card_header("Geographic Expansion"),
-          bslib::card_body(
-            h5("Key Observations:", class = "text-primary"),
-            tags$ul(
-              tags$li("Northward expansion from traditional endemic areas"),
-              tags$li("Emergence in previously non-endemic Midwestern states"),
-              tags$li("Coastal regions show highest concentration"),
-              tags$li("Some Western states reporting first confirmed cases")
+              )
             )
           )
         ),
-
         bslib::card(
           bslib::card_header("Regional Patterns"),
           bslib::card_body(
@@ -150,6 +113,48 @@ geography_ui <- function(id) {
               showcase = icon("triangle-exclamation"),
               theme = "info",
               p("New cases appearing", class = "fs-6")
+            )
+          )
+        )
+        # bslib::card_footer(
+        #   class = "text-muted small",
+        #   icon("info-circle"),
+        #   " Click on states to see detailed information. Data shown is simulated for
+        #   demonstration purposes."
+        # )
+      )
+    ),
+
+    # Geographic expansion chart
+    bslib::card(
+      full_screen = TRUE,
+      bslib::card_body(
+        highchartOutput(ns("geo_expansion"), height = "350px") %>%
+          shinycssloaders::withSpinner(type = 7, color = "#254D56")
+      ),
+      card_footer(
+        "Source: ",
+        popover(
+          a("CDC (2025)", href = "javascript:void(0);"),
+          markdown(
+            "Centers for Disease Control and Prevention. (2025). *Lyme Disease Surveillance Data*. [https://www.cdc.gov/lyme/data-research/facts-stats/surveillance-data-1.html](https://www.cdc.gov/lyme/data-research/facts-stats/surveillance-data-1.html)"
+          )
+        )
+      ),
+
+      # Key insights
+      bslib::layout_column_wrap(
+        width = 1 / 2,
+
+        bslib::card(
+          bslib::card_header("Geographic Expansion"),
+          bslib::card_body(
+            h5("Key Observations:", class = "text-primary"),
+            tags$ul(
+              tags$li("Northward expansion from traditional endemic areas"),
+              tags$li("Emergence in previously non-endemic Midwestern states"),
+              tags$li("Coastal regions show highest concentration"),
+              tags$li("Some Western states reporting first confirmed cases")
             )
           )
         )

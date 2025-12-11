@@ -37,6 +37,7 @@ education_ui <- function(id) {
     # Transmission ------------------------------------------------------------
     bslib::layout_column_wrap(
       bslib::card(
+        full_screen = TRUE,
         bslib::card_header(
           class = "bg-primary text-white",
           icon("bug"),
@@ -85,7 +86,7 @@ education_ui <- function(id) {
             column(
               width = 6,
               img(
-                src = "tick.png",
+                src = "images/tick.png",
                 alt = "Black-legged or Deer Tick (Ixodes scapularis) life stages",
                 width = "100%"
               )
@@ -118,6 +119,7 @@ education_ui <- function(id) {
 
       # Symptoms ---------------------------------------------------------------
       bslib::card(
+        full_screen = TRUE,
         bslib::card_header(
           class = "bg-danger text-light",
           icon("stethoscope"),
@@ -164,7 +166,7 @@ education_ui <- function(id) {
             column(
               width = 5,
               img(
-                src = "tick-bite.png",
+                src = "images/tick-bite.png",
                 alt = "'Bulls eye' rash from Lyme disease",
                 width = "100%"
               )
@@ -186,6 +188,7 @@ education_ui <- function(id) {
     # Treatment -------------------------------------------------------------
     bslib::layout_column_wrap(
       bslib::card(
+        full_screen = TRUE,
         bslib::card_header(
           class = "bg-success text-white",
           icon("pills"),
@@ -235,6 +238,7 @@ education_ui <- function(id) {
 
       # Long-term Consequences -------------------------------------------------
       bslib::card(
+        full_screen = TRUE,
         bslib::card_header(
           class = "bg-info text-white",
           icon("clock"),

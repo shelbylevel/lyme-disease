@@ -29,7 +29,7 @@ color:
   success: "#727E70"            # success states
   info: "#b2c5b4"               # info messages
   warning: "#B8AEA8"            # warnings
-  danger: "#59224A"             # errors/danger
+  danger: "#6f4a64"             # errors/danger
   light: "#ecf1f2"              # light backgrounds
   dark: "#64635E"               # dark elements
 

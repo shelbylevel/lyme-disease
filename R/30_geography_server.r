@@ -141,7 +141,7 @@ geography_server <- function(id) {
           type = "line",
           data = cty_expansion$pct_change_since_2001,
           yAxis = 1,
-          color = "#FFA726",
+          color = "#4B4C4B",
           tooltip = list(valueDecimals = 1, valueSuffix = "%")
         ) %>%
         hc_title(

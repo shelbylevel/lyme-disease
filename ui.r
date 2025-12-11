@@ -142,9 +142,9 @@ bslib::page_navbar(
 
   # ------ Tab 4: Climate & Risk Factors ----------------------------------------
   bslib::nav_panel(
-    title = "Climate & Risk Factors",
+    title = "Climate & Environmental Risk",
     icon = icon("temperature-half"),
-    risk_factors_ui("risk_factors")
+    climate_ui("climate")
   ),
 
   # ------ Tab 5: Public Health Impact ------------------------------------------
