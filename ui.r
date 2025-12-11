@@ -148,11 +148,11 @@ bslib::page_navbar(
   ),
 
   # ------ Tab 5: Public Health Impact ------------------------------------------
-  # bslib::nav_panel(
-  #   title = "Public Health Impact",
-  #   icon = icon("hospital"),
-  #   public_health_ui("public_health")
-  # ),
+  bslib::nav_panel(
+    title = "Public Health Impact",
+    icon = icon("hospital"),
+    public_health_ui("public_health")
+  ),
 
   # ------ Footer ----------------------------------------------------------------
   footer = tags$div(
