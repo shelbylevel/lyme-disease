@@ -35,55 +35,43 @@ education_ui <- function(id) {
     ),
 
     # Transmission ------------------------------------------------------------
-    bslib::card(
-      bslib::card_header(
-        class = "bg-primary text-white",
-        icon("bug"),
-        "How is Lyme Disease Transmitted?"
-      ),
-      bslib::card_body(
-        p(
-          "In the eastern United States, black-legged ticks (sometimes called deer ticks) are the main species carrying the ",
-          tags$em("Borrelia"),
-          " bacteria, while along the West Coast of the US, western black-legged ticks are the dominant species. Both species are most commonly found in grass (especially taller grass), brushy, and wooded areas. Areas with leaf litter may also harbor ticks."
+    bslib::layout_column_wrap(
+      bslib::card(
+        bslib::card_header(
+          class = "bg-primary text-white",
+          icon("bug"),
+          "How is Lyme Disease Transmitted?"
         ),
-        tags$hr(),
-        fluidRow(
-          column(
-            width = 5,
-            img(
-              src = "tick.png",
-              alt = "Black-legged or Deer Tick (Ixodes scapularis) life stages",
-              width = "90%"
-            ),
+        bslib::card_body(
+          tags$div(
+            style = "margin-bottom: 1em;",
+            icon("location-dot", class = "text-success"),
+            tags$b("Tick Species:"),
+            " In the eastern United States, black-legged ticks (sometimes called deer ticks) are the main species carrying the ",
+            tags$em("Borrelia"),
+            " bacteria, while along the West Coast of the United States, western black-legged ticks are the dominant species."
           ),
-          column(
-            width = 7,
-            bslib::card(
-              class = "bg-light",
-              bslib::card_body(
-                class = "text-primary fw-bold",
-                p(
-                  "Ticks must be attached to the host's skin (person or animal) for at least 24 hours for the",
-                  tags$em("Borrelia"),
-                  " bacteria to be transmitted"
-                )
-              )
-            ),
-            fluidRow(
-              column(
-                width = 6,
-                h5(tags$em("Borrelia"), "Bacteria"),
-                tags$ul(
-                  tags$li(
-                    "Prevalence in tick populations ranges from 0 to 50%"
-                  ),
-                  tags$li("Both nymphal and adult ticks may be infected")
-                )
-              ),
-              column(
-                width = 6,
-                h5("Risk Factors"),
+          tags$div(
+            style = "margin-bottom: 1em;",
+            icon("leaf", class = "text-warning"),
+            tags$b("Habitats:"),
+            " Both species of ticks are most commonly found in grass (especially taller grass), brushy, and wooded areas. Areas with leaf litter may also harbors ticks."
+          ),
+          tags$div(
+            style = "margin-bottom: 1em;",
+            icon("circle-info", class = "text-primary"),
+            tags$b("Prevalence:"),
+            " Infection rates of the ",
+            tags$em("Borrelia"),
+            " bacteria in tick populations range from 0% to 50%. Both nymphal and adult ticks may be infected."
+          ),
+          fluidRow(
+            column(
+              width = 6,
+              tags$div(
+                style = "margin-bottom: 1em;",
+                icon("triangle-exclamation", class = "text-danger"),
+                tags$b("Risk Factors:"),
                 tags$ul(
                   tags$li("Spending time in wooded or grassy areas"),
                   tags$li("Not using tick repellent"),
@@ -93,42 +81,62 @@ education_ui <- function(id) {
                   tags$li("Living in or visiting endemic areas")
                 )
               )
+            ),
+            column(
+              width = 6,
+              img(
+                src = "tick.png",
+                alt = "Black-legged or Deer Tick (Ixodes scapularis) life stages",
+                width = "100%"
+              )
+            )
+          ),
+          bslib::card(
+            class = "bg-light",
+            bslib::card_body(
+              class = "text-primary fw-bold",
+              p(
+                icon("clock"),
+                "Transmission Time: Ticks must be attached to the host's skin (person or animal) for at least 24 hours to transmit the ",
+                tags$em("Borrelia"),
+                " bacteria."
+              )
+            )
+          )
+        ),
+        card_footer(
+          "Sources: ",
+          popover(
+            a("CDC (2024); ALDF (n.d.)", href = "javascript:void(0);"),
+            HTML(
+              'Centers for Disease Control and Prevention. (2024). <em>Causes of Lyme disease</em>. <a href="https://www.cdc.gov/lyme/causes/index.html">https://www.cdc.gov/lyme/causes/index.html</a><br><br>
+            American Lyme Disease Foundation. (n.d.). <em>Tick Identification and Information</em>. <a href="https://aldf.com/tick-identification-and-information/">https://aldf.com/tick-identification-and-information/a>'
             )
           )
         )
       ),
-      card_footer(
-        "Sources: ",
-        popover(
-          a("CDC (2024); ALDF (n.d.)", href = "#"),
-          markdown(
-            "Centers for Disease Control and Prevention. (2024). *Causes of Lyme disease*. [https://www.cdc.gov/lyme/causes/index.html](https://www.cdc.gov/lyme/causes/index.html) <br<br>
-            American Lyme Disease Foundation. (n.d.). *Tick Identification and Information*. [https://aldf.com/tick-identification-and-information/](https://aldf.com/tick-identification-and-information/)"
-          )
-        )
-      )
-    ),
 
-    # Symptoms ---------------------------------------------------------------
-    bslib::card(
-      bslib::card_header(
-        class = "bg-danger text-light",
-        icon("stethoscope"),
-        "Symptoms of Lyme Disease"
-      ),
-      bslib::card_body(
-        fluidRow(
-          column(
-            width = 9,
-            p(
-              "The classic Lyme disease sign present in up to 80% of cases is a red Erythema migran (EM) rash that starts at the tick bite and expands over time. It sometimes develops a 'bulls eye' appearance with a concentric ring of rash around the smaller initial rash, but not always. It typically appears by day 7 following the bite, but can be up to 30 days after."
-            ),
-            tags$hr(),
-            fluidRow(
-              column(
-                width = 5,
-                h5("Other early symptoms include:"),
-                h6("(3-30 days after being bitten by an infected tick)"),
+      # Symptoms ---------------------------------------------------------------
+      bslib::card(
+        bslib::card_header(
+          class = "bg-danger text-light",
+          icon("stethoscope"),
+          "Symptoms of Lyme Disease"
+        ),
+        bslib::card_body(
+          tags$div(
+            style = "margin-bottom: 1em;",
+            icon("circle-dot", class = "text-warning"),
+            tags$b("Classic Sign:"),
+            " Up to 80% of cases present with a red Erythema migrans (EM) rash starting at the tick bite and expanding over time. It often develops a 'bulls eye' appearance with a concentric ring of rash around the smaller initial rash. This typically appears between 7 and 30 days after the bite."
+          ),
+          fluidRow(
+            column(
+              width = 7,
+              tags$div(
+                style = "margin-bottom: 1em;",
+                icon("bolt", class = "text-primary"),
+                tags$b("Early Symptoms (3 – 30 days after bite):"),
                 tags$ul(
                   tags$li("Headache"),
                   tags$li("Fatigue"),
@@ -137,39 +145,39 @@ education_ui <- function(id) {
                   tags$li("Swollen lymph nodes")
                 )
               ),
-              column(
-                width = 7,
-                h5(
-                  "If left untreated, neurological symptoms may appear:"
+              tags$div(
+                style = "margin-bottom: 1em;",
+                icon("brain", class = "text-danger"),
+                tags$b(
+                  "If Left Untreated: Neurological and cardiac symptoms may develop"
                 ),
                 tags$ul(
                   tags$li("Facial palsy"),
-                  tags$li("Arthritis"),
-                  tags$li("Joint swelling"),
+                  tags$li("Arthritis and joint swelling"),
                   tags$li("Irregular heartbeat or heart palpitations"),
                   tags$li("Shortness of breath"),
                   tags$li("Nerve pain"),
                   tags$li("Brain or spinal cord inflammation")
                 )
               )
-            )
-          ),
-          column(
-            width = 3,
-            img(
-              src = "tick-bite.png",
-              alt = "'Bulls eye' rash from Lyme disease",
-              width = "100%"
+            ),
+            column(
+              width = 5,
+              img(
+                src = "tick-bite.png",
+                alt = "'Bulls eye' rash from Lyme disease",
+                width = "100%"
+              )
             )
           )
-        )
-      ),
-      card_footer(
-        "Sources: ",
-        popover(
-          a("CDC (2024)", href = "#"),
-          markdown(
-            "Centers for Disease Control and Prevention. (2024). *Signs and Symptoms of Untreated Lyme Disease*. [https://www.cdc.gov/lyme/signs-symptoms/index.html](https://www.cdc.gov/lyme/signs-symptoms/index.html)"
+        ),
+        card_footer(
+          "Sources: ",
+          popover(
+            a("CDC (2024)", href = "javascript:void(0);"),
+            HTML(
+              'Centers for Disease Control and Prevention. (2024). <em>Signs and Symptoms of Untreated Lyme Disease</em>. <a href="https://www.cdc.gov/lyme/signs-symptoms/index.html">https://www.cdc.gov/lyme/signs-symptoms/index.html</a>'
+            )
           )
         )
       )
@@ -177,8 +185,6 @@ education_ui <- function(id) {
 
     # Treatment -------------------------------------------------------------
     bslib::layout_column_wrap(
-      #width = 1 / 2,
-
       bslib::card(
         bslib::card_header(
           class = "bg-success text-white",
@@ -211,27 +217,17 @@ education_ui <- function(id) {
             )
           )
         ),
-        bslib::card(
-          class = "bg-light",
-          bslib::card_body(
-            class = "text-primary fw-bold",
-            p(
-              icon("exclamation-triangle"),
-              " Early diagnosis and treatment are crucial for best outcomes"
-            )
-          )
-        ),
         card_footer(
           "Sources: ",
           popover(
             a(
-              "Cornell Health (n.d.); Johns Hopkins (n.d.); CDC (2024)",
-              href = "#"
+              "CDC (2024); Cornell Health (n.d.); Johns Hopkins (n.d.)",
+              href = "javascript:void(0);"
             ),
             markdown(
-              "Cornell Health. (n.d.). *Tick Bites & Lyme Disease*. [https://health.cornell.edu/about/news/tick-bites-lyme-disease](https://health.cornell.edu/about/news/tick-bites-lyme-disease) <br<br>
-              Johns Hopkins Lyme Disease Research Center. (n.d.). *Lyme Disease Treatment and Prognosis*. [https://www.hopkinslyme.org/lyme-disease/treatment-and-prognosis-of-lyme-disease/](https://www.hopkinslyme.org/lyme-disease/treatment-and-prognosis-of-lyme-disease/) <br><br>
-              Centers for Disease Control and Prevention. (2024). *Testing and Diagnosis for Lyme disease*. [https://www.cdc.gov/lyme/diagnosis-testing/index.html](https://www.cdc.gov/lyme/diagnosis-testing/index.html)"
+              "Centers for Disease Control and Prevention. (2024). *Testing and Diagnosis for Lyme disease*. [https://www.cdc.gov/lyme/diagnosis-testing/index.html](https://www.cdc.gov/lyme/diagnosis-testing/index.html) <br><br>
+              Cornell Health. (n.d.). *Tick Bites & Lyme Disease*. [https://health.cornell.edu/about/news/tick-bites-lyme-disease](https://health.cornell.edu/about/news/tick-bites-lyme-disease) <br><br>
+              Johns Hopkins Lyme Disease Research Center. (n.d.). *Lyme Disease Treatment and Prognosis*. [https://www.hopkinslyme.org/lyme-disease/treatment-and-prognosis-of-lyme-disease/](https://www.hopkinslyme.org/lyme-disease/treatment-and-prognosis-of-lyme-disease/)"
             )
           )
         )
@@ -245,6 +241,17 @@ education_ui <- function(id) {
           "Long-term Consequences"
         ),
         bslib::card_body(
+          bslib::card(
+            class = "bg-light",
+            bslib::card_body(
+              class = "text-primary fw-bold",
+              p(
+                icon("exclamation-triangle"),
+                " Early diagnosis and treatment are crucial for best outcomes"
+              )
+            )
+          ),
+          tags$br(),
           tags$div(
             style = "margin-bottom: 1em;",
             icon("check-circle", class = "text-success"),
@@ -269,7 +276,7 @@ education_ui <- function(id) {
         card_footer(
           "Sources: ",
           popover(
-            a("CDC (2025)", href = "#"),
+            a("CDC (2025)", href = "javascript:void(0);"),
             markdown(
               "Centers for Disease Control and Prevention. (2024). *Chronic Symptoms and Lyme Disease*. [https://www.cdc.gov/lyme/signs-symptoms/chronic-symptoms-and-lyme-disease.html](https://www.cdc.gov/lyme/signs-symptoms/chronic-symptoms-and-lyme-disease.html)"
             )
