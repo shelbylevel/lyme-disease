@@ -10,14 +10,21 @@
 public_health_server <- function(id) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
-    
+
     # ------ REACTIVE DATA -----------------------------------------------------
-    
+
     # Generate healthcare burden data by region
     burden_data <- reactive({
-      regions <- c("Northeast", "Mid-Atlantic", "Upper Midwest", 
-                  "Southeast", "Southwest", "West", "Northwest")
-      
+      regions <- c(
+        "Northeast",
+        "Mid-Atlantic",
+        "Upper Midwest",
+        "Southeast",
+        "Southwest",
+        "West",
+        "Northwest"
+      )
+
       data.frame(
         region = regions,
         cases = c(150000, 180000, 95000, 25000, 8000, 12000, 15000),
@@ -26,13 +33,13 @@ public_health_server <- function(id) {
       ) |>
         dplyr::arrange(desc(cases))
     })
-    
+
     # ------ OUTPUT ------------------------------------------------------------
-    
+
     # Healthcare burden chart
     output$burden_chart <- echarts4r::renderEcharts4r({
       data <- burden_data()
-      
+
       data |>
         echarts4r::e_charts(region) |>
         echarts4r::e_bar(
@@ -71,9 +78,9 @@ public_health_server <- function(id) {
         echarts4r::e_toolbox_feature(feature = "saveAsImage") |>
         echarts4r::e_grid(bottom = "20%")
     })
-    
+
     # ------ RETURN VALUES -----------------------------------------------------
-    
+
     return(burden_data)
   })
 }

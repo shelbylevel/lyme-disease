@@ -9,13 +9,13 @@
 #' @return A Shiny UI element
 risk_factors_ui <- function(id) {
   ns <- NS(id)
-  
+
   bslib::layout_sidebar(
     # Sidebar for controls
     sidebar = bslib::sidebar(
       title = "Analysis Controls",
       width = 300,
-      
+
       selectInput(
         ns("climate_factor"),
         "Climate Factor:",
@@ -27,7 +27,7 @@ risk_factors_ui <- function(id) {
         ),
         selected = "temp"
       ),
-      
+
       selectInput(
         ns("social_factor"),
         "Social Factor:",
@@ -39,7 +39,7 @@ risk_factors_ui <- function(id) {
         ),
         selected = "pop_density"
       ),
-      
+
       sliderInput(
         ns("year_range"),
         "Year Range:",
@@ -49,9 +49,9 @@ risk_factors_ui <- function(id) {
         step = 1,
         sep = ""
       ),
-      
+
       hr(),
-      
+
       h6("Key Climate Drivers:", class = "fw-bold"),
       tags$ul(
         class = "small",
@@ -61,26 +61,31 @@ risk_factors_ui <- function(id) {
         tags$li("Milder winters")
       )
     ),
-    
+
     # Main content area
     bslib::layout_column_wrap(
       width = 1,
-      
+
       # Page header
       bslib::card(
         bslib::card_body(
           class = "p-3",
           h2("Climate Change & Risk Factors", class = "mb-1"),
-          p("How environmental and social factors expand Lyme disease risk", 
-            class = "text-muted mb-0")
+          p(
+            "How environmental and social factors expand Lyme disease risk",
+            class = "text-muted mb-0"
+          )
         )
       ),
-      
+
       # Climate impact explanation
       bslib::card(
         class = "bg-light",
         bslib::card_body(
-          h4("How Climate Change Affects Lyme Disease", class = "text-primary mb-3"),
+          h4(
+            "How Climate Change Affects Lyme Disease",
+            class = "text-primary mb-3"
+          ),
           fluidRow(
             column(
               width = 3,
@@ -90,8 +95,10 @@ risk_factors_ui <- function(id) {
                   class = "text-center",
                   icon("temperature-high", class = "fa-3x text-danger mb-2"),
                   h6("Warmer Temperatures"),
-                  p("Extends tick active season and expands geographic range northward",
-                    class = "small mb-0")
+                  p(
+                    "Extends tick active season and expands geographic range northward",
+                    class = "small mb-0"
+                  )
                 )
               )
             ),
@@ -103,8 +110,10 @@ risk_factors_ui <- function(id) {
                   class = "text-center",
                   icon("cloud-rain", class = "fa-3x text-primary mb-2"),
                   h6("Precipitation Changes"),
-                  p("Alters habitat suitability and host animal populations",
-                    class = "small mb-0")
+                  p(
+                    "Alters habitat suitability and host animal populations",
+                    class = "small mb-0"
+                  )
                 )
               )
             ),
@@ -116,8 +125,10 @@ risk_factors_ui <- function(id) {
                   class = "text-center",
                   icon("snowflake", class = "fa-3x text-info mb-2"),
                   h6("Milder Winters"),
-                  p("Increases tick survival rates through winter months",
-                    class = "small mb-0")
+                  p(
+                    "Increases tick survival rates through winter months",
+                    class = "small mb-0"
+                  )
                 )
               )
             ),
@@ -129,24 +140,29 @@ risk_factors_ui <- function(id) {
                   class = "text-center",
                   icon("leaf", class = "fa-3x text-success mb-2"),
                   h6("Ecosystem Changes"),
-                  p("Affects deer and rodent populations that serve as tick hosts",
-                    class = "small mb-0")
+                  p(
+                    "Affects deer and rodent populations that serve as tick hosts",
+                    class = "small mb-0"
+                  )
                 )
               )
             )
           )
         )
       ),
-      
+
       # Climate correlation chart
       bslib::card(
         full_screen = TRUE,
         bslib::card_header("Climate Factor vs. Lyme Disease Cases"),
         bslib::card_body(
-          echarts4r::echarts4rOutput(ns("climate_correlation"), height = "400px")
+          echarts4r::echarts4rOutput(
+            ns("climate_correlation"),
+            height = "400px"
+          )
         )
       ),
-      
+
       # Social factors chart
       bslib::card(
         full_screen = TRUE,
@@ -155,11 +171,11 @@ risk_factors_ui <- function(id) {
           echarts4r::echarts4rOutput(ns("social_factors"), height = "400px")
         )
       ),
-      
+
       # At-risk population analysis
       bslib::layout_column_wrap(
-        width = 1/2,
-        
+        width = 1 / 2,
+
         bslib::card(
           bslib::card_header("Expanding At-Risk Population"),
           bslib::card_body(
@@ -169,8 +185,10 @@ risk_factors_ui <- function(id) {
               bslib::card_body(
                 class = "py-2",
                 h6("Outdoor Workers", class = "mb-1"),
-                p("Landscapers, foresters, and agricultural workers face daily exposure",
-                  class = "small mb-0")
+                p(
+                  "Landscapers, foresters, and agricultural workers face daily exposure",
+                  class = "small mb-0"
+                )
               )
             ),
             bslib::card(
@@ -178,8 +196,10 @@ risk_factors_ui <- function(id) {
               bslib::card_body(
                 class = "py-2",
                 h6("Suburban Residents", class = "mb-1"),
-                p("Urban sprawl brings more people into tick habitats",
-                  class = "small mb-0")
+                p(
+                  "Urban sprawl brings more people into tick habitats",
+                  class = "small mb-0"
+                )
               )
             ),
             bslib::card(
@@ -187,8 +207,10 @@ risk_factors_ui <- function(id) {
               bslib::card_body(
                 class = "py-2",
                 h6("Outdoor Enthusiasts", class = "mb-1"),
-                p("Hikers, campers, and hunters in endemic areas",
-                  class = "small mb-0")
+                p(
+                  "Hikers, campers, and hunters in endemic areas",
+                  class = "small mb-0"
+                )
               )
             ),
             bslib::card(
@@ -196,13 +218,15 @@ risk_factors_ui <- function(id) {
               bslib::card_body(
                 class = "py-2",
                 h6("Children", class = "mb-1"),
-                p("More time playing outdoors, less aware of tick prevention",
-                  class = "small mb-0")
+                p(
+                  "More time playing outdoors, less aware of tick prevention",
+                  class = "small mb-0"
+                )
               )
             )
           )
         ),
-        
+
         bslib::card(
           bslib::card_header("Climate-Driven Expansion"),
           bslib::card_body(

@@ -19,7 +19,7 @@ home_ui <- function(id) {
       bslib::card_body(
         class = "p-4 text-center bg-light",
         h1(
-          "Lyme Disease in the United States",
+          "Why Lyme Disease?",
           class = "mb-3"
         ),
         h4(
@@ -29,36 +29,19 @@ home_ui <- function(id) {
       )
     ),
 
-    bslib::card(
-      bslib::card_body(
-        class = "p-4 text-center bg-light",
-        h2("Why Lyme Disease?", class = "mb-2"),
-        p(
-          class = "text-muted mb-1",
-          "Understanding America's most common vector-borne disease"
-        )
-      ),
-      bslib::card_body(
-        p(
-          class = "lead text-center",
-          style = "margin-top: 10px;",
-          "Lyme disease is a bacterial disease transmitted by the bite of an infected tick. 
-          The primary bacterium that causes Lyme disease is ",
-          tags$em("Borrelia burgdorferi")
-        )
-      )
-    ),
-
     # Key statistics row
     bslib::layout_column_wrap(
       width = 1 / 4,
 
       bslib::value_box(
-        title = "Annual US Cases",
+        title = "Each Year in the US",
         value = "~476,000",
         showcase = icon("bug"),
         theme = "danger",
-        p("Estimated cases per year", class = "fs-6")
+        p(
+          "people may be diagnosed and treated for Lyme disease",
+          class = "fs-6"
+        )
       ),
       bslib::value_box(
         title = "High Incidence States",
@@ -191,23 +174,23 @@ home_ui <- function(id) {
     ),
 
     # Call to action
-    bslib::card(
-      class = "bg-light",
-      bslib::card_body(
-        class = "text-center p-4",
-        h5("Ready to explore the data?", class = "mb-3"),
-        p(
-          "Start with Lyme Disease 101 to understand the basics, then explore the geographic 
-          and climate trends.",
-          class = "mb-3"
-        ),
-        actionButton(
-          ns("start_exploring"),
-          "Start Exploring",
-          icon = icon("arrow-right"),
-          class = "btn-primary btn-lg"
-        )
-      )
-    )
+    # bslib::card(
+    #   class = "bg-light",
+    #   bslib::card_body(
+    #     class = "text-center p-4",
+    #     h5("Ready to explore the data?", class = "mb-3"),
+    #     p(
+    #       "Start with Lyme Disease 101 to understand the basics, then explore the geographic
+    #       and climate trends.",
+    #       class = "mb-3"
+    #     ),
+    #     actionButton(
+    #       ns("start_exploring"),
+    #       "Start Exploring",
+    #       icon = icon("arrow-right"),
+    #       class = "btn-primary btn-lg"
+    #     )
+    #   )
+    # )
   )
 }

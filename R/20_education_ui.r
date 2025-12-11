@@ -34,26 +34,6 @@ education_ui <- function(id) {
       )
     ),
 
-    # Lyme Disease Over Time --------------------------------------------------
-
-    # bslib::card(
-    #   full_screen = TRUE,
-    # bslib::card_header("Changes Over Time"),
-    #   bslib::card_body(
-    #     highchartOutput(ns("time_series"), height = "550px") %>%
-    #       shinycssloaders::withSpinner(type = 7, color = "#254D56")
-    #   ),
-    #   card_footer(
-    #     "Source: ",
-    #     popover(
-    #       a("CDC (2024)", href = "#"),
-    #       markdown(
-    #         "Centers for Disease Control and Prevention. (2025). *Lyme Disease Case Maps*. [https://www.cdc.gov/lyme/data-research/facts-stats/lyme-disease-case-map.html](https://www.cdc.gov/lyme/data-research/facts-stats/lyme-disease-case-map.html)"
-    #       )
-    #     )
-    #   )
-    # ),
-
     # Transmission ------------------------------------------------------------
     bslib::card(
       bslib::card_header(
@@ -70,25 +50,47 @@ education_ui <- function(id) {
         tags$hr(),
         fluidRow(
           column(
-            width = 6,
-            h5(tags$em("Borrelia"), "Bacteria"),
-            tags$ul(
-              tags$li(
-                "Prevalence in tick populations ranges from 0 to 50%"
-              ),
-              tags$li("Both nymphal and adult ticks may be infected")
-            )
+            width = 5,
+            img(
+              src = "tick.png",
+              alt = "Black-legged or Deer Tick (Ixodes scapularis) life stages",
+              width = "90%"
+            ),
           ),
           column(
-            width = 6,
+            width = 7,
             bslib::card(
               class = "bg-light",
               bslib::card_body(
                 class = "text-primary fw-bold",
                 p(
-                  "Ticks must be attached to the host (person or animal) for at least 24 hours for the",
+                  "Ticks must be attached to the host's skin (person or animal) for at least 24 hours for the",
                   tags$em("Borrelia"),
                   " bacteria to be transmitted"
+                )
+              )
+            ),
+            fluidRow(
+              column(
+                width = 6,
+                h5(tags$em("Borrelia"), "Bacteria"),
+                tags$ul(
+                  tags$li(
+                    "Prevalence in tick populations ranges from 0 to 50%"
+                  ),
+                  tags$li("Both nymphal and adult ticks may be infected")
+                )
+              ),
+              column(
+                width = 6,
+                h5("Risk Factors"),
+                tags$ul(
+                  tags$li("Spending time in wooded or grassy areas"),
+                  tags$li("Not using tick repellent"),
+                  tags$li(
+                    "Not performing tick checks after outdoor activities"
+                  ),
+                  tags$li("Living in or visiting endemic areas")
                 )
               )
             )
@@ -96,11 +98,12 @@ education_ui <- function(id) {
         )
       ),
       card_footer(
-        "Source: ",
+        "Sources: ",
         popover(
-          a("CDC (2024)", href = "#"),
+          a("CDC (2024); ALDF (n.d.)", href = "#"),
           markdown(
-            "Centers for Disease Control and Prevention. (2024). *Causes of Lyme disease*. [https://www.cdc.gov/lyme/causes/index.html](https://www.cdc.gov/lyme/causes/index.html)"
+            "Centers for Disease Control and Prevention. (2024). *Causes of Lyme disease*. [https://www.cdc.gov/lyme/causes/index.html](https://www.cdc.gov/lyme/causes/index.html) <br<br>
+            American Lyme Disease Foundation. (n.d.). *Tick Identification and Information*. [https://aldf.com/tick-identification-and-information/](https://aldf.com/tick-identification-and-information/)"
           )
         )
       )
@@ -111,65 +114,64 @@ education_ui <- function(id) {
       bslib::card_header(
         class = "bg-danger text-light",
         icon("stethoscope"),
-        "Symptoms"
+        "Symptoms of Lyme Disease"
       ),
       bslib::card_body(
-        # fluidRow(
-        #   column(
-        #     width = 8,
-        #     h5("Transmission Process:"),
-        #     tags$ol(
-        #       tags$li(
-        #         tags$b("Tick Attachment:"),
-        #         " An infected blacklegged tick bites and
-        #               attaches to human skin"
-        #       ),
-        #       tags$li(
-        #         tags$b("Feeding Period:"),
-        #         " Tick must be attached for 36-48 hours
-        #               to transmit the bacteria"
-        #       ),
-        #       tags$li(
-        #         tags$b("Bacterial Transfer:"),
-        #         " ",
-        #         tags$em("Borrelia burgdorferi"),
-        #         " bacteria enter bloodstream"
-        #       ),
-        #       tags$li(
-        #         tags$b("Infection Spreads:"),
-        #         " Bacteria disseminate through the body
-        #               if untreated"
-        #       )
-        #     ),
-        #     tags$hr(),
-        #     h5("Risk Factors:"),
-        #     tags$ul(
-        #       tags$li("Spending time in wooded or grassy areas"),
-        #       tags$li("Not using tick repellent"),
-        #       tags$li("Not performing tick checks after outdoor activities"),
-        #       tags$li("Living in or visiting endemic areas")
-        #     )
-        #   ),
-        #   column(
-        #     width = 4,
-        #     bslib::card(
-        #       class = "bg-light",
-        #       bslib::card_body(
-        #         h6("Prevention Tips:", class = "text-primary fw-bold"),
-        #         tags$ul(
-        #           class = "small",
-        #           tags$li("Use EPA-registered insect repellents"),
-        #           tags$li("Wear long sleeves and pants"),
-        #           tags$li("Tuck pants into socks"),
-        #           tags$li("Walk in center of trails"),
-        #           tags$li("Check for ticks daily"),
-        #           tags$li("Shower within 2 hours of being outdoors"),
-        #           tags$li("Put clothes in dryer on high heat")
-        #         )
-        #       )
-        #     )
-        #   )
-        # )
+        fluidRow(
+          column(
+            width = 9,
+            p(
+              "The classic Lyme disease sign present in up to 80% of cases is a red Erythema migran (EM) rash that starts at the tick bite and expands over time. It sometimes develops a 'bulls eye' appearance with a concentric ring of rash around the smaller initial rash, but not always. It typically appears by day 7 following the bite, but can be up to 30 days after."
+            ),
+            tags$hr(),
+            fluidRow(
+              column(
+                width = 5,
+                h5("Other early symptoms include:"),
+                h6("(3-30 days after being bitten by an infected tick)"),
+                tags$ul(
+                  tags$li("Headache"),
+                  tags$li("Fatigue"),
+                  tags$li("Muscle and joint aches"),
+                  tags$li("Fever"),
+                  tags$li("Swollen lymph nodes")
+                )
+              ),
+              column(
+                width = 7,
+                h5(
+                  "If left untreated, neurological symptoms may appear:"
+                ),
+                tags$ul(
+                  tags$li("Facial palsy"),
+                  tags$li("Arthritis"),
+                  tags$li("Joint swelling"),
+                  tags$li("Irregular heartbeat or heart palpitations"),
+                  tags$li("Shortness of breath"),
+                  tags$li("Nerve pain"),
+                  tags$li("Brain or spinal cord inflammation")
+                )
+              )
+            )
+          ),
+          column(
+            width = 3,
+            img(
+              src = "tick-bite.png",
+              alt = "'Bulls eye' rash from Lyme disease",
+              width = "100%"
+            )
+          )
+        )
+      ),
+      card_footer(
+        "Sources: ",
+        popover(
+          a("CDC (2024)", href = "#"),
+          markdown(
+            "Centers for Disease Control and Prevention. (2024). *Signs and Symptoms of Untreated Lyme Disease*. [https://www.cdc.gov/lyme/signs-symptoms/index.html](https://www.cdc.gov/lyme/signs-symptoms/index.html)"
+          )
+        )
       )
     ),
 
@@ -184,145 +186,95 @@ education_ui <- function(id) {
           "Treatment"
         ),
         bslib::card_body(
-          #   h5("Early Localized Stage (3-30 days):"),
-          #   tags$ul(
-          #     tags$li(
-          #       tags$b("Erythema migrans (EM) rash:"),
-          #       " 'Bull's-eye' rash in 70-80%
-          #             of cases"
-          #     ),
-          #     tags$li("Fever and chills"),
-          #     tags$li("Fatigue"),
-          #     tags$li("Headache"),
-          #     tags$li("Muscle and joint aches")
-          #   ),
-          #   tags$hr(),
-          #   h5("Early Disseminated Stage (days-weeks):"),
-          #   tags$ul(
-          #     tags$li("Multiple EM rashes"),
-          #     tags$li("Facial palsy"),
-          #     tags$li("Severe headaches and neck stiffness"),
-          #     tags$li("Heart palpitations (Lyme carditis)"),
-          #     tags$li("Nerve pain and shooting pains")
-          #   ),
-          #   tags$hr(),
-          #   h5("Late Disseminated Stage (months-years):"),
-          #   tags$ul(
-          #     tags$li("Severe arthritis, particularly in knees"),
-          #     tags$li("Neurological problems"),
-          #     tags$li("Cognitive difficulties"),
-          #     tags$li("Numbness in extremities")
+          h5("What to Do If You Find an Attached Tick"),
+          h6("After Time Outside"),
+          tags$ul(
+            tags$li(
+              tags$b("Remove the tick promptly:"),
+              " Carefully remove the tick with tweezers, grasping the tick as close to the skin as possible and pulling firmly and steadily outward."
+            ),
+            tags$li(
+              tags$b("Exposure less than 24 hours:"),
+              " Not all ticks are infected, and transmission of ",
+              tags$em("Borrelia"),
+              " bacteria is unlikely. Monitor for symptoms over the next 30 days."
+            ),
+            tags$li(
+              tags$b("Exposure more than 24 hours:"),
+              " First-line treatment is usually a course of doxycycline (an antibiotic) as prescribed by a healthcare provider. The person may also choose to watch and wait for symptoms and then begin treatment once symptomatic, especially if located in an area where Lyme disease is less common. Antibiotics are generally helpful when started within 10-14 days of the bite."
+            ),
+            tags$li(
+              tags$b("Testing for Lyme disease:"),
+              " Certain lab tests can detect antibodies to the ",
+              tags$em("Borrelia"),
+              " bacteria 4–6 weeks after exposure. Testing too early may result in a false negative because antibodies have not yet built up."
+            )
+          )
+        ),
+        bslib::card(
+          class = "bg-light",
+          bslib::card_body(
+            class = "text-primary fw-bold",
+            p(
+              icon("exclamation-triangle"),
+              " Early diagnosis and treatment are crucial for best outcomes"
+            )
+          )
+        ),
+        card_footer(
+          "Sources: ",
+          popover(
+            a(
+              "Cornell Health (n.d.); Johns Hopkins (n.d.); CDC (2024)",
+              href = "#"
+            ),
+            markdown(
+              "Cornell Health. (n.d.). *Tick Bites & Lyme Disease*. [https://health.cornell.edu/about/news/tick-bites-lyme-disease](https://health.cornell.edu/about/news/tick-bites-lyme-disease) <br<br>
+              Johns Hopkins Lyme Disease Research Center. (n.d.). *Lyme Disease Treatment and Prognosis*. [https://www.hopkinslyme.org/lyme-disease/treatment-and-prognosis-of-lyme-disease/](https://www.hopkinslyme.org/lyme-disease/treatment-and-prognosis-of-lyme-disease/) <br><br>
+              Centers for Disease Control and Prevention. (2024). *Testing and Diagnosis for Lyme disease*. [https://www.cdc.gov/lyme/diagnosis-testing/index.html](https://www.cdc.gov/lyme/diagnosis-testing/index.html)"
+            )
+          )
         )
-      )
-    ),
-
-    #   bslib::card(
-    #     bslib::card_header(
-    #       class = "bg-warning text-dark",
-    #       icon("circle-info"),
-    #       " Treatment"
-    #     ),
-    #     bslib::card_body(
-    #       h5("Standard Treatment Protocol:"),
-    #       bslib::card(
-    #         class = "border-success",
-    #         bslib::card_body(
-    #           h6("Early Stage:"),
-    #           tags$ul(
-    #             tags$li("Oral antibiotics: Doxycycline (10-21 days)"),
-    #             tags$li("Alternative: Amoxicillin or Cefuroxime"),
-    #             tags$li(tags$b("Success rate:"), " >90% when caught early")
-    #           )
-    #         )
-    #       ),
-    #       bslib::card(
-    #         class = "border-warning",
-    #         bslib::card_body(
-    #           h6("Later Stages:"),
-    #           tags$ul(
-    #             tags$li("Longer courses of oral antibiotics (28 days)"),
-    #             tags$li("IV antibiotics for neurological symptoms"),
-    #             tags$li("Treatment of specific complications")
-    #           )
-    #         )
-    #       ),
-    #       tags$hr(),
-    #       p(
-    #         class = "text-muted small mb-0",
-    #         icon("exclamation-triangle"),
-    #         " Early diagnosis and treatment are crucial for best outcomes. If you suspect
-    #         Lyme disease, consult a healthcare provider immediately."
-    #       )
-    #     )
-    #   )
-    # ),
-
-    # Long-term Consequences -------------------------------------------------
-    bslib::card(
-      bslib::card_header(
-        class = "bg-info text-white",
-        icon("clock"),
-        "Long-term Consequences"
       ),
-      bslib::card_body(
-        # fluidRow(
-        #   column(
-        #     width = 6,
-        #     bslib::card(
-        #       class = "border-success border-2",
-        #       bslib::card_header("With Prompt Treatment"),
-        #       bslib::card_body(
-        #         h6("Expected Outcomes:", class = "text-success"),
-        #         tags$ul(
-        #           tags$li("Complete recovery in most cases"),
-        #           tags$li("Symptoms resolve within weeks"),
-        #           tags$li("No long-term complications"),
-        #           tags$li("Return to normal activities")
-        #         ),
-        #         p(
-        #           class = "small text-muted mb-0",
-        #           "~10-20% may experience lingering symptoms (Post-Treatment Lyme Disease
-        #           Syndrome) even after appropriate treatment."
-        #         )
-        #       )
-        #     )
-        #   ),
-        #   column(
-        #     width = 6,
-        #     bslib::card(
-        #       class = "border-danger border-2",
-        #       bslib::card_header("Without Treatment"),
-        #       bslib::card_body(
-        #         h6("Potential Complications:", class = "text-danger"),
-        #         tags$ul(
-        #           tags$li(
-        #             tags$b("Chronic arthritis:"),
-        #             " Particularly in large joints"
-        #           ),
-        #           tags$li(
-        #             tags$b("Neurological issues:"),
-        #             " Memory problems, difficulty
-        #                   concentrating"
-        #           ),
-        #           tags$li(
-        #             tags$b("Cardiac complications:"),
-        #             " Heart rhythm irregularities"
-        #           ),
-        #           tags$li(
-        #             tags$b("Chronic pain:"),
-        #             " Persistent muscle and joint pain"
-        #           ),
-        #           tags$li(tags$b("Fatigue:"), " Severe, debilitating tiredness")
-        #         ),
-        #         p(
-        #           class = "small text-muted mb-0",
-        #           "Untreated Lyme disease can have serious long-term health impacts affecting
-        #           quality of life."
-        #         )
-        #       )
-        #     )
-        #   )
-        # )
+
+      # Long-term Consequences -------------------------------------------------
+      bslib::card(
+        bslib::card_header(
+          class = "bg-info text-white",
+          icon("clock"),
+          "Long-term Consequences"
+        ),
+        bslib::card_body(
+          tags$div(
+            style = "margin-bottom: 1em;",
+            icon("check-circle", class = "text-success"),
+            tags$b("Prompt Treatment:"),
+            " If Lyme disease is treated promptly with appropriate antibiotics, it usually resolves in a few weeks with no long-term consequences."
+          ),
+          tags$div(
+            style = "margin-bottom: 1em;",
+            icon("exclamation-circle", class = "text-warning"),
+            tags$b("Delayed or No Treatment:"),
+            " Can lead to long-term nervous system and/or joint damage. Persistent symptoms in persons with Lyme disease are now called ",
+            tags$b("Post-Treatment Lyme Disease Syndrome"),
+            " to better describe ongoing consequences."
+          ),
+          tags$div(
+            style = "margin-bottom: 1em;",
+            icon("redo", class = "text-danger"),
+            tags$b("No Immunity:"),
+            " Another bite by an infected tick can re-transmit Lyme disease, even after recovery."
+          )
+        ),
+        card_footer(
+          "Sources: ",
+          popover(
+            a("CDC (2025)", href = "#"),
+            markdown(
+              "Centers for Disease Control and Prevention. (2024). *Chronic Symptoms and Lyme Disease*. [https://www.cdc.gov/lyme/signs-symptoms/chronic-symptoms-and-lyme-disease.html](https://www.cdc.gov/lyme/signs-symptoms/chronic-symptoms-and-lyme-disease.html)"
+            )
+          )
+        )
       )
     )
   )

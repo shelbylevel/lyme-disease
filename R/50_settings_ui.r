@@ -9,20 +9,22 @@
 #' @return A Shiny UI element
 public_health_ui <- function(id) {
   ns <- NS(id)
-  
+
   bslib::layout_column_wrap(
     width = 1,
-    
+
     # Page header
     bslib::card(
       bslib::card_body(
         class = "p-4 text-center bg-light",
         h2("Public Health Implications", class = "mb-2"),
-        p("Understanding the healthcare burden of expanding Lyme disease", 
-          class = "lead text-muted mb-0")
+        p(
+          "Understanding the healthcare burden of expanding Lyme disease",
+          class = "lead text-muted mb-0"
+        )
       )
     ),
-    
+
     # Economic burden
     bslib::card(
       bslib::card_header(
@@ -36,14 +38,26 @@ public_health_ui <- function(id) {
             width = 8,
             h5("Direct Medical Costs:"),
             tags$ul(
-              tags$li(tags$b("Annual healthcare spending:"), " Estimated $1.3 billion in 
-                      direct medical costs"),
-              tags$li(tags$b("Per-case treatment:"), " $3,000 - $6,000 for early-stage 
-                      diagnosis and treatment"),
-              tags$li(tags$b("Chronic cases:"), " Up to $63,000 over 6 months for patients 
-                      with post-treatment symptoms"),
-              tags$li(tags$b("Emergency visits:"), " Increasing burden on emergency departments 
-                      in endemic areas")
+              tags$li(
+                tags$b("Annual healthcare spending:"),
+                " Estimated $1.3 billion in 
+                      direct medical costs"
+              ),
+              tags$li(
+                tags$b("Per-case treatment:"),
+                " $3,000 - $6,000 for early-stage 
+                      diagnosis and treatment"
+              ),
+              tags$li(
+                tags$b("Chronic cases:"),
+                " Up to $63,000 over 6 months for patients 
+                      with post-treatment symptoms"
+              ),
+              tags$li(
+                tags$b("Emergency visits:"),
+                " Increasing burden on emergency departments 
+                      in endemic areas"
+              )
             ),
             tags$hr(),
             h5("Indirect Economic Impact:"),
@@ -81,11 +95,11 @@ public_health_ui <- function(id) {
         )
       )
     ),
-    
+
     # Healthcare system challenges
     bslib::layout_column_wrap(
-      width = 1/2,
-      
+      width = 1 / 2,
+
       bslib::card(
         bslib::card_header("Healthcare System Challenges"),
         bslib::card_body(
@@ -95,9 +109,11 @@ public_health_ui <- function(id) {
             bslib::card_body(
               class = "py-2",
               h6("Diagnosis in Non-Endemic Areas", class = "mb-1 text-warning"),
-              p("Physicians in newly affected regions may lack experience recognizing 
+              p(
+                "Physicians in newly affected regions may lack experience recognizing 
                 early symptoms, leading to delayed diagnosis and treatment.",
-                class = "small mb-0")
+                class = "small mb-0"
+              )
             )
           ),
           bslib::card(
@@ -105,9 +121,11 @@ public_health_ui <- function(id) {
             bslib::card_body(
               class = "py-2",
               h6("Testing Capacity", class = "mb-1 text-warning"),
-              p("Laboratory infrastructure may be inadequate in emerging endemic areas, 
+              p(
+                "Laboratory infrastructure may be inadequate in emerging endemic areas, 
                 affecting diagnostic accuracy.",
-                class = "small mb-0")
+                class = "small mb-0"
+              )
             )
           ),
           bslib::card(
@@ -115,14 +133,16 @@ public_health_ui <- function(id) {
             bslib::card_body(
               class = "py-2",
               h6("Patient Education", class = "mb-1 text-warning"),
-              p("Populations in newly affected areas may be unaware of prevention 
+              p(
+                "Populations in newly affected areas may be unaware of prevention 
                 strategies and early warning signs.",
-                class = "small mb-0")
+                class = "small mb-0"
+              )
             )
           )
         )
       ),
-      
+
       bslib::card(
         bslib::card_header("Required Healthcare Responses"),
         bslib::card_body(
@@ -156,7 +176,7 @@ public_health_ui <- function(id) {
         )
       )
     ),
-    
+
     # Public health burden chart
     bslib::card(
       full_screen = TRUE,
@@ -165,7 +185,7 @@ public_health_ui <- function(id) {
         echarts4r::echarts4rOutput(ns("burden_chart"), height = "400px")
       )
     ),
-    
+
     # Vulnerable populations
     bslib::card(
       bslib::card_header(
@@ -226,15 +246,18 @@ public_health_ui <- function(id) {
         )
       )
     ),
-    
+
     # Call to action
     bslib::card(
       class = "bg-success text-white",
       bslib::card_body(
         class = "p-4",
         h4("Moving Forward: A Public Health Response", class = "mb-3"),
-        p("Addressing the expanding threat of Lyme disease requires coordinated action 
-          across multiple sectors:", class = "lead"),
+        p(
+          "Addressing the expanding threat of Lyme disease requires coordinated action 
+          across multiple sectors:",
+          class = "lead"
+        ),
         fluidRow(
           column(
             width = 6,

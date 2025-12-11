@@ -37,8 +37,10 @@ geography_ui <- function(id) {
       hr(),
 
       h6("Endemic States", class = "fw-bold"),
-      p("States with historically high Lyme disease incidence:",
-        class = "small text-muted"),
+      p(
+        "States with historically high Lyme disease incidence:",
+        class = "small text-muted"
+      ),
       tags$ul(
         class = "small",
         tags$li("Connecticut"),
@@ -76,8 +78,10 @@ geography_ui <- function(id) {
         bslib::card_body(
           class = "p-3",
           h2("Geographic Distribution of Lyme Disease", class = "mb-1"),
-          p("Visualizing the spread of Lyme disease across the United States",
-            class = "text-muted mb-0")
+          p(
+            "Visualizing the spread of Lyme disease across the United States",
+            class = "text-muted mb-0"
+          )
         )
       ),
 
@@ -106,7 +110,7 @@ geography_ui <- function(id) {
 
       # Key insights
       bslib::layout_column_wrap(
-        width = 1/2,
+        width = 1 / 2,
 
         bslib::card(
           bslib::card_header("Geographic Expansion"),
