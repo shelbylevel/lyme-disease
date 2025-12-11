@@ -47,7 +47,7 @@ home_server <- function(id) {
           type = "line",
           data = lyme_yearly$rate,
           yAxis = 1,
-          color = "#84727e"
+          color = "#6f4a64"
         ) %>%
         hc_title(text = "Lyme Disease Cases and Incidence Rate by Year") %>%
         hc_tooltip(

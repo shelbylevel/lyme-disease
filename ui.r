@@ -161,7 +161,7 @@ bslib::page_navbar(
     tags$p(
       HTML(
         paste(
-          "Lyme Disease & Climate Dashboard",
+          "Lyme Disease Dashboard Developed By:",
           "<br>",
           "Shelby Level, MPA and Rachel Mauk, PhD • ",
           current_year

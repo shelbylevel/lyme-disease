@@ -79,7 +79,7 @@ home_ui <- function(id) {
         value = "Rising",
         showcase = icon("temperature-high"),
         theme = "info",
-        p("Warming extends tick season", class = "fs-6")
+        p("Warming temps extend tick season", class = "fs-6")
       )
     ),
 
@@ -104,7 +104,10 @@ home_ui <- function(id) {
       width = 1 / 2,
 
       bslib::card(
-        bslib::card_header("About This Dashboard"),
+        bslib::card_header(
+          class = "bg-primary text-white",
+          "About This Dashboard"
+        ),
         bslib::card_body(
           p(
             "This interactive dashboard explores the relationship between climate change and the 
@@ -128,52 +131,39 @@ home_ui <- function(id) {
               " Examine implications for healthcare systems"
             )
           ),
-          tags$hr(),
-          p(
-            class = "text-muted mb-0",
-            "Navigate using the tabs above to explore each topic in detail."
+          bslib::card(
+            class = "bg-light",
+            bslib::card_body(
+              class = "text-primary fw-bold",
+              p("Navigate using the tabs above to explore each topic in detail")
+            )
           )
         )
       ),
 
       bslib::card(
-        bslib::card_header("Key Findings"),
+        bslib::card_header(
+          class = "bg-danger text-white",
+          "Key Findings"
+        ),
         bslib::card_body(
-          bslib::card(
-            class = "border-start border-danger border-4",
-            bslib::card_body(
-              class = "py-2",
-              h6("Rising Incidence", class = "mb-1"),
-              p(
-                "Lyme disease is the most common vector-borne illness in the US, with cases 
-                increasing dramatically over the past three decades.",
-                class = "small mb-0"
-              )
-            )
+          tags$div(
+            style = "margin-bottom: 1em;",
+            icon("arrow-trend-up", class = "text-danger"),
+            tags$b("Rising Incidence:"),
+            " Lyme disease is the most common vector-borne illness in the US, with cases increasing dramatically over the past three decades."
           ),
-          bslib::card(
-            class = "border-start border-warning border-4",
-            bslib::card_body(
-              class = "py-2",
-              h6("Geographic Expansion", class = "mb-1"),
-              p(
-                "Blacklegged ticks are spreading northward and westward, bringing Lyme disease 
-                to previously unaffected regions.",
-                class = "small mb-0"
-              )
-            )
+          tags$div(
+            style = "margin-bottom: 1em;",
+            icon("map-location-dot", class = "text-warning"),
+            tags$b("Geographic Expansion:"),
+            " Blacklegged ticks are spreading northward and westward, bringing Lyme disease to previously unaffected regions."
           ),
-          bslib::card(
-            class = "border-start border-primary border-4",
-            bslib::card_body(
-              class = "py-2",
-              h6("Climate Connection", class = "mb-1"),
-              p(
-                "Warmer temperatures and changing precipitation patterns are creating favorable 
-                conditions for tick populations.",
-                class = "small mb-0"
-              )
-            )
+          tags$div(
+            style = "margin-bottom: 1em;",
+            icon("temperature-high", class = "text-primary"),
+            tags$b("Climate Connection:"),
+            " Warmer temperatures and changing precipitation patterns are creating favorable conditions for tick populations."
           )
         )
       )

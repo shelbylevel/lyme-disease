@@ -121,7 +121,7 @@ education_ui <- function(id) {
       bslib::card(
         full_screen = TRUE,
         bslib::card_header(
-          class = "bg-danger text-light",
+          class = "bg-success text-white",
           icon("stethoscope"),
           "Symptoms of Lyme Disease"
         ),
@@ -190,7 +190,7 @@ education_ui <- function(id) {
       bslib::card(
         full_screen = TRUE,
         bslib::card_header(
-          class = "bg-success text-white",
+          class = "bg-warning text-black",
           icon("pills"),
           "Treatment"
         ),
@@ -240,7 +240,7 @@ education_ui <- function(id) {
       bslib::card(
         full_screen = TRUE,
         bslib::card_header(
-          class = "bg-info text-white",
+          class = "bg-danger text-light",
           icon("clock"),
           "Long-term Consequences"
         ),
