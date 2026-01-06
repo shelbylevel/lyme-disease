@@ -25,7 +25,8 @@ options(
 # Load US county geometries for mapping
 cty_geom <- tigris::counties(
   cb = TRUE, #clip boundaries
-  year = 2020
+  year = 2020,
+  resolution = "20m" #low resolution for quicker mapping
 ) %>%
   tigris::shift_geometry() %>% # move AK and HI
   filter(as.numeric(STATEFP) < 57) # Keep only 50 states & DC
@@ -33,7 +34,8 @@ cty_geom <- tigris::counties(
 # Load US state geometries for mapping
 state_geom <- tigris::states(
   cb = TRUE, #clip boundaries
-  year = 2020
+  year = 2020,
+  resolution = "20m" #low resolution for quicker mapping
 ) %>%
   tigris::shift_geometry() %>% # move AK and HI
   filter(as.numeric(STATEFP) < 57) # Keep only 50 states & DC
