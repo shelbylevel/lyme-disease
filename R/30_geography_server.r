@@ -51,87 +51,64 @@ geography_server <- function(id) {
         }
       }
 
-      return(geom)
       # convert to list for highcharter
-      # geom %>%
-      #   geojsonio::geojson_list()
+      geom %>%
+        geojsonio::geojson_list()
     })
 
     # ------ OUTPUT ------------------------------------------------------------
 
     # Map
-    output$us_map <- renderPlot({
-      # Get geometry (sf object) and data
-      geom_sf <- map_geom() # should be an sf object
-      data_df <- map_data() # should be a data.frame/tibble
+    output$us_map <- renderHighchart({
+      ns <- session$ns
 
-      # Join data to geometry by GEOID
-      map_sf <- dplyr::left_join(geom_sf, data_df, by = "GEOID")
+      tooltip_header <- if (input$geo_level == "State") {
+        "return ('<b>State</b>: ' + this.point.stname +"
+      } else if (input$geo_level == "County") {
+        "return ('<b>County</b>: ' + this.point.ctyname +"
+      }
 
-      # Set rate = NA for counties with 0 (or missing) cases/rate
-      map_sf$rate[is.na(map_sf$rate) | map_sf$rate == 0] <- NA
-
-      ggplot(map_sf) +
-        geom_sf(aes(fill = rate), color = NA) +
-        scale_fill_gradient(
-          na.value = "#E0E0E0",
-          low = "#a2bbbd",
-          high = "#254D56",
-          name = "Case Rate\n(per 100,000)",
-          guide = guide_colorbar(title.theme = element_text(face = "bold"))
-        ) +
-        labs(
-          title = paste("Lyme Disease Cases in", input$year)
-        ) +
-        theme_void() +
-        theme(
-          legend.position = "right",
-          plot.title = element_text(face = "bold", size = 18, hjust = 0.5)
+      # Create map
+      highchart() %>%
+        hc_add_series_map(
+          map = map_geom(),
+          df = map_data(),
+          value = "rate",
+          joinBy = "GEOID",
+          name = "Lyme Disease"
+        ) %>%
+        hc_title(text = paste("Lyme Disease Cases in", input$year)) %>%
+        hc_mapNavigation(enabled = TRUE) %>%
+        hc_tooltip(
+          formatter = JS(
+            paste0(
+              "function(){",
+              tooltip_header,
+              "' <br> <b>Rate</b>: ' + Highcharts.numberFormat(this.point.value, 2, '.', ',') +
+                ' <br> <b>Cases</b>: ' + Highcharts.numberFormat(this.point.cases, 0, '.', ','));
+              }"
+            )
+          )
+        ) %>%
+        hc_legend(
+          title = list(text = "Case Rate (per 100,000 population)")
+        ) %>%
+        hc_colorAxis(
+          stops = list(
+            list(0, "#E0E0E0"),
+            list(0.001, "#a2bbbd"),
+            list(1, "#254D56")
+          )
+          # minColor = "#a2bbbd",
+          # maxColor = "#254D56"
+          # stops = color_stops(n = 10)
         )
+      # hc_colorAxis(
+      #   minColor = "#E7ECC3",
+      #   maxColor = "#005C44"
+      # ) %>%
+      #hc_size(height = 600, width = 600)
     })
-
-    # output$us_map <- renderHighchart({
-    #   ns <- session$ns
-
-    #   tooltip_header <- if (input$geo_level == "State") {
-    #     "return ('<b>State</b>: ' + this.point.stname +"
-    #   } else if (input$geo_level == "County") {
-    #     "return ('<b>County</b>: ' + this.point.ctyname +"
-    #   }
-
-    #   # Create map
-    #   highchart() %>%
-    #     hc_add_series_map(
-    #       map = map_geom(),
-    #       df = map_data(),
-    #       value = "rate",
-    #       joinBy = "GEOID",
-    #       name = "Lyme Disease"
-    #     ) %>%
-    #     hc_title(text = paste("Lyme Disease Cases in", input$year)) %>%
-    #     hc_mapNavigation(enabled = TRUE) %>%
-    #     hc_tooltip(
-    #       formatter = JS(
-    #         paste0(
-    #           "function(){",
-    #           tooltip_header,
-    #           "' <br> <b>Rate</b>: ' + Highcharts.numberFormat(this.point.value, 2, '.', ',') +
-    #             ' <br> <b>Cases</b>: ' + Highcharts.numberFormat(this.point.cases, 0, '.', ','));
-    #           }"
-    #         )
-    #       )
-    #     ) %>%
-    #     hc_legend(
-    #       title = list(text = "Case Rate (per 100,000 population)")
-    #     ) %>%
-    #     hc_colorAxis(
-    #       stops = list(
-    #         list(0, "#E0E0E0"),
-    #         list(0.001, "#a2bbbd"),
-    #         list(1, "#254D56")
-    #       )
-    #     )
-    # })
 
     # Trend chart
     output$geo_expansion <- renderHighchart({
