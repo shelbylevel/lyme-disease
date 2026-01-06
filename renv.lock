@@ -1082,65 +1082,6 @@
       "Maintainer": "Hadley Wickham <hadley@rstudio.com>",
       "Repository": "CRAN"
     },
-    "corrplot": {
-      "Package": "corrplot",
-      "Version": "0.95",
-      "Source": "Repository",
-      "Type": "Package",
-      "Title": "Visualization of a Correlation Matrix",
-      "Date": "2024-10-14",
-      "Authors@R": "c( person('Taiyun', 'Wei', email = 'weitaiyun@gmail.com', role = c('cre', 'aut')), person('Viliam', 'Simko', email = 'viliam.simko@gmail.com', role = 'aut'), person('Michael', 'Levy', email = 'michael.levy@healthcatalyst.com', role = 'ctb'), person('Yihui', 'Xie', email = 'xie@yihui.name', role = 'ctb'), person('Yan', 'Jin', email = 'jyfeather@gmail.com', role = 'ctb'), person('Jeff', 'Zemla', email = 'zemla@wisc.edu', role = 'ctb'), person('Moritz', 'Freidank', email = 'freidankm@googlemail.com', role = 'ctb'), person('Jun', 'Cai', email = 'cai-j12@mails.tsinghua.edu.cn', role = 'ctb'), person('Tomas', 'Protivinsky', email = 'tomas.protivinsky@gmail.com', role = 'ctb') )",
-      "Maintainer": "Taiyun Wei <weitaiyun@gmail.com>",
-      "Suggests": [
-        "seriation",
-        "knitr",
-        "RColorBrewer",
-        "rmarkdown",
-        "magrittr",
-        "prettydoc",
-        "testthat"
-      ],
-      "Description": "Provides a visual exploratory tool on correlation matrix that supports automatic variable reordering to help detect hidden patterns among variables.",
-      "License": "MIT + file LICENSE",
-      "URL": "https://github.com/taiyun/corrplot",
-      "BugReports": "https://github.com/taiyun/corrplot/issues",
-      "VignetteBuilder": "knitr",
-      "RoxygenNote": "7.2.1",
-      "NeedsCompilation": "no",
-      "Author": "Taiyun Wei [cre, aut], Viliam Simko [aut], Michael Levy [ctb], Yihui Xie [ctb], Yan Jin [ctb], Jeff Zemla [ctb], Moritz Freidank [ctb], Jun Cai [ctb], Tomas Protivinsky [ctb]",
-      "Repository": "CRAN"
-    },
-    "countrycode": {
-      "Package": "countrycode",
-      "Version": "1.6.1",
-      "Source": "Repository",
-      "Type": "Package",
-      "Title": "Convert Country Names and Country Codes",
-      "Authors@R": "c(person(given = \"Vincent\", family = \"Arel-Bundock\", role = c(\"aut\", \"cre\"), email = \"vincent.arel-bundock@umontreal.ca\", comment = c(ORCID = \"0000-0003-2042-7063\")), person(given = \"CJ\", family = \"Yetman\", role = \"ctb\", email = \"cj@cjyetman.com\", comment = c(ORCID = \"0000-0001-5099-9500\")), person(given = \"Nils\", family = \"Enevoldsen\", role = \"ctb\", email = \"nils@wlonk.com\", comment = c(ORCID = \"0000-0001-7195-4117\")), person(\"Etienne\", \"Bacher\", email = \"etienne.bacher@protonmail.com\", role = \"ctb\", comment = c(ORCID = \"0000-0002-9271-5075\")), person(given = \"Samuel\", family = \"Meichtry\", role = \"ctb\", email = \"samuel.meichtry@bj.admin.ch\", comment = c(ORCID = \"0000-0003-2165-791X\")))",
-      "Description": "Standardize country names, convert them into one of 40 different coding schemes, convert between coding schemes, and assign region descriptors.",
-      "License": "GPL-3",
-      "URL": "https://vincentarelbundock.github.io/countrycode/",
-      "BugReports": "https://github.com/vincentarelbundock/countrycode/issues",
-      "Depends": [
-        "R (>= 2.10)"
-      ],
-      "Suggests": [
-        "altdoc",
-        "eurostat",
-        "testthat",
-        "tibble",
-        "ISOcodes",
-        "utf8"
-      ],
-      "Encoding": "UTF-8",
-      "LazyData": "yes",
-      "LazyLoad": "yes",
-      "RoxygenNote": "7.3.2",
-      "NeedsCompilation": "no",
-      "Author": "Vincent Arel-Bundock [aut, cre] (<https://orcid.org/0000-0003-2042-7063>), CJ Yetman [ctb] (<https://orcid.org/0000-0001-5099-9500>), Nils Enevoldsen [ctb] (<https://orcid.org/0000-0001-7195-4117>), Etienne Bacher [ctb] (<https://orcid.org/0000-0002-9271-5075>), Samuel Meichtry [ctb] (<https://orcid.org/0000-0003-2165-791X>)",
-      "Maintainer": "Vincent Arel-Bundock <vincent.arel-bundock@umontreal.ca>",
-      "Repository": "CRAN"
-    },
     "cpp11": {
       "Package": "cpp11",
       "Version": "0.5.2",
@@ -1558,50 +1499,6 @@
       "NeedsCompilation": "yes",
       "Author": "David Meyer [aut, cre] (<https://orcid.org/0000-0002-5196-3048>), Evgenia Dimitriadou [aut, cph], Kurt Hornik [aut] (<https://orcid.org/0000-0003-4198-9911>), Andreas Weingessel [aut], Friedrich Leisch [aut], Chih-Chung Chang [ctb, cph] (libsvm C++-code), Chih-Chen Lin [ctb, cph] (libsvm C++-code)",
       "Maintainer": "David Meyer <David.Meyer@R-project.org>",
-      "Repository": "CRAN"
-    },
-    "echarts4r": {
-      "Package": "echarts4r",
-      "Version": "0.4.6",
-      "Source": "Repository",
-      "Title": "Create Interactive Graphs with 'Echarts JavaScript' Version 5",
-      "Date": "2025-09-11",
-      "Authors@R": "c( person(\"John\", \"Coene\", email = \"jcoenep@gmail.com\", role = c(\"aut\", \"cph\")), person(\"David\", \"Munoz Tord\", email = \"david.munoztord@mailbox.org\", role = c(\"cre\", \"ctb\"), comment = c(ORCID = \"0000-0001-7954-8295\")), person(given = \"Wei\", family = \"Su\", email = \"swsoyee@gmail.com\", role = \"ctb\"), person(family = \"Helgasoft\", email = \"contact@helgasoft.com\", role = \"ctb\"), person(\"Xianying\", \"Tan\", email = \"shrektan@126.com\", role = \"ctb\", comment = c(ORCID = \"0000-0002-6072-3521\")), person(\"Robin\", \"Cura\", email = \"robin.cura@gmail.com\", role = \"ctb\", comment = c(ORCID = \"0000-0001-5926-1828\")), person(\"Mathida\", \"Chuk\", email = \"mathidachuk@gmail.com\", role = \"ctb\"), person(\"Robert\", \"Koetsier\", email = \"rk8roko@gmail.com \", role = \"ctb\", comment = c(ORCID = \"0000-0002-4477-5401\")), person(\"Jelle\", \"Geertsma\", email = \"rdatasculptor@gmail.com\", role = \"ctb\"), person(\"Teofil\", \"Nakov\", email = \"teofiln@gmail.com\", role = \"ctb\") )",
-      "Description": "Easily create interactive charts by leveraging the 'Echarts Javascript' library which includes 36 chart types, themes, 'Shiny' proxies and animations.",
-      "License": "Apache License (>= 2.0)",
-      "Encoding": "UTF-8",
-      "Imports": [
-        "htmlwidgets",
-        "dplyr (>= 0.7.0)",
-        "purrr",
-        "countrycode",
-        "broom",
-        "shiny",
-        "scales",
-        "corrplot",
-        "htmltools",
-        "jsonlite",
-        "rstudioapi"
-      ],
-      "Suggests": [
-        "tidyr",
-        "testthat",
-        "knitr",
-        "rmarkdown",
-        "covr",
-        "data.tree",
-        "leaflet",
-        "tibble"
-      ],
-      "Depends": [
-        "R (>= 4.1.0)"
-      ],
-      "RoxygenNote": "7.3.2",
-      "URL": "https://echarts4r.john-coene.com/, https://github.com/JohnCoene/echarts4r",
-      "BugReports": "https://github.com/JohnCoene/echarts4r/issues/",
-      "NeedsCompilation": "no",
-      "Author": "John Coene [aut, cph], David Munoz Tord [cre, ctb] (ORCID: <https://orcid.org/0000-0001-7954-8295>), Wei Su [ctb], Helgasoft [ctb], Xianying Tan [ctb] (ORCID: <https://orcid.org/0000-0002-6072-3521>), Robin Cura [ctb] (ORCID: <https://orcid.org/0000-0001-5926-1828>), Mathida Chuk [ctb], Robert Koetsier [ctb] (ORCID: <https://orcid.org/0000-0002-4477-5401>), Jelle Geertsma [ctb], Teofil Nakov [ctb]",
-      "Maintainer": "David Munoz Tord <david.munoztord@mailbox.org>",
       "Repository": "CRAN"
     },
     "evaluate": {
@@ -4620,31 +4517,6 @@
       "Author": "Hadley Wickham [aut], Thomas Lin Pedersen [cre, aut] (<https://orcid.org/0000-0002-5147-4711>), Dana Seidel [aut], Posit Software, PBC [cph, fnd] (03wc8by49)",
       "Maintainer": "Thomas Lin Pedersen <thomas.pedersen@posit.co>",
       "Repository": "CRAN"
-    },
-    "scrollytell": {
-      "Package": "scrollytell",
-      "Version": "0.1.0.9000",
-      "Source": "GitHub",
-      "Type": "Package",
-      "Title": "Scrollytelling for RMarkdown and Shiny",
-      "Authors@R": "c( person(\"Pearce\", \"Adam\", role=c(\"aut\"), comment=\"Original javascript author of graph-scroll.js\") , person(\"Roelof Waaijman\", \"Waaijman\", role=c(\"aut\", \"cre\"), email=\"rwaaijman@gmail.com\") , person(\"Edwin\", \"de Jonge\", role=c(\"aut\"), email=\"edwindjonge@gmail.com\") )",
-      "Description": "Uses the scrollama library to provide scrolly telling functionality for R.",
-      "License": "GPL-3 + file LICENSE",
-      "Encoding": "UTF-8",
-      "Imports": [
-        "htmlwidgets",
-        "htmltools"
-      ],
-      "RoxygenNote": "6.1.1",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "scrollytell",
-      "RemoteUsername": "statistiekcbs",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "89a359c934c59b2626b50dda5ba90da5dbe54fdc",
-      "NeedsCompilation": "no",
-      "Author": "Pearce Adam [aut] (Original javascript author of graph-scroll.js), Roelof Waaijman Waaijman [aut, cre], Edwin de Jonge [aut]",
-      "Maintainer": "Roelof Waaijman Waaijman <rwaaijman@gmail.com>"
     },
     "selectr": {
       "Package": "selectr",
