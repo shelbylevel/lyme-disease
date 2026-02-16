@@ -67,10 +67,10 @@ home_ui <- function(id) {
       bslib::value_box(
         title = "Geographic Expansion",
         value = paste0("↑ ", round(cty_incr_since_2001, 1), "%"),
-        showcase = icon("arrow-trend-up"),
-        # showcase = highchartOutput(ns("cty_expansion"), height = "60px"),
+        # showcase = icon("arrow-trend-up"),
+        showcase = highchartOutput(ns("cty_expansion"), height = "60px"),
         # showcase_layout = "bottom",
-        # full_screen = TRUE,
+        full_screen = TRUE,
         theme = "primary",
         p("County increase since 2001", class = "fs-6")
       ),
