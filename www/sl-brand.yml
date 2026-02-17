@@ -4,22 +4,22 @@ meta:
 
 color:
   palette:
-    deep_jade: "#254D56"
-    faded_jade: "#45767a"
-    faded_jade_50: "#a2bbbd"
-    faded_jade_10: "#ecf1f2"
+    deep-jade: "#254D56"
+    faded-jade: "#45767a"
+    faded-jade-50: "#a2bbbd"
+    faded-jade-10: "#ecf1f2"
     gulfstream: "#7fa6ad"
     edgewater: "#d3dfdd"
-    edgewater_20: "#dce5e4"
+    edgewater-20: "#dce5e4"
     cascade: "#b3c2c9"
     boulder: "#727E70"
-    spring_rain: "#b2c5b4"
+    spring-rain: "#b2c5b4"
     timberwolf: "#D8D5CE"
-    timberwolf_50: "#eceae7"
-    almond_dust: "#B8AEA8"
+    timberwolf-50: "#eceae7"
+    almond-dust: "#B8AEA8"
     moonstone: "#969996"
-    storm_cloud: "#64635E"
-    plum_crazy: "#59224A"
+    storm-cloud: "#64635E"
+    plum-crazy: "#59224A"
   
   foreground: "#000000"         # main text color
   background: "#ffffff"         # background
@@ -61,7 +61,64 @@ defaults:
   bootstrap:
     # defaults: # defaults also supports a string as its value
     #   navbar-light-hover-color: $brand-faded_jade
-    # rules: | # CSS rules
+  shiny:
+    defaults:
+      navbar-light-hover-color: $brand-faded-jade
+    theme:
+      preset: shiny # base
+      rules: | # CSS rules
+        /* Remove flex from tab content */
+        .tab-pane.html-fill-container {
+          display: block !important;
+        }
+
+        /* Ensure inactive tabs are hidden */
+        .tab-pane:not(.active) {
+          display: none !important;
+        }
+      
+        .tab-pane.active {
+          display: block !important;
+        }
+      
+        /* Remove equal-height rows in grid */
+        .bslib-grid {
+          grid-auto-rows: auto !important;
+        }
+      
+        /* Remove gap spacing between grid items */
+        .bslib-gap-spacing {
+          gap: 0 !important;
+        }
+      
+        /* Remove fixed heights, let cards expand naturally */
+        .bslib-page-navbar .tab-content {
+          height: auto !important;
+          overflow-y: visible !important;
+        }
+      
+        .card {
+          height: auto !important;
+          min-height: auto !important;
+          max-height: none !important;
+        }
+      
+        .card-body {
+          height: auto !important;
+          min-height: auto !important;
+          overflow-y: visible !important;
+        }
+      
+        /* Ensure page scrolls normally */
+        body, html {
+          height: auto;
+          overflow-y: auto;
+        }
+      
+        .bslib-page-navbar {
+          height: auto !important;
+          min-height: 100vh;
+        }
     #   /*****************
     #   ANIMATED LOGO
     #   *****************/

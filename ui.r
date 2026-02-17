@@ -11,110 +11,52 @@ bslib::page_navbar(
 
   # Set theme with Lyme disease colors
   theme = bslib::bs_theme(
+    # preset = "shiny", # maybe sandstone
     brand = "www/sl-brand.yml"
-    # version = 5,
-    # primary = "#727E70",
-    # success = "#b2c5b4",
-    # danger = "#59224A",
-    # warning = "#FFA726",
-    # bg = "#FFFFFF",
-    # fg = "#1B1B1B"
   ),
 
   # ------ Custom CSS ------------------------------------------------------------
-  header = tags$head(
-    tags$style(HTML(
-      "
-      /* Remove flex from tab content */
-      .tab-pane.html-fill-container {
-        display: block !important;
-      }
-      
-      /* Ensure inactive tabs are hidden */
-      .tab-pane:not(.active) {
-        display: none !important;
-      }
-      
-      .tab-pane.active {
-        display: block !important;
-      }
-      
-      /* Remove equal-height rows in grid */
-      .bslib-grid {
-        grid-auto-rows: auto !important;
-      }
-      
-      /* Remove gap spacing between grid items */
-      .bslib-gap-spacing {
-        gap: 0 !important;
-      }
-      
-      /* Remove fixed heights, let cards expand naturally */
-      .bslib-page-navbar .tab-content {
-        height: auto !important;
-        overflow-y: visible !important;
-      }
-      
-      .card {
-        height: auto !important;
-        min-height: auto !important;
-        max-height: none !important;
-      }
-      
-      .card-body {
-        height: auto !important;
-        min-height: auto !important;
-        overflow-y: visible !important;
-      }
-      
-      /* Ensure page scrolls normally */
-      body, html {
-        height: auto;
-        overflow-y: auto;
-      }
-      
-      .bslib-page-navbar {
-        height: auto !important;
-        min-height: 100vh;
-      }
-      
-      /* Scrollytell specific styles */
-      .scrolly-overlay {
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .scrolly-section {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-      }
-      
-      /* Grid layout adjustments */
-      .bslib-grid {
-        height: auto !important;
-        align-items: start;
-      }
-      
-      .bslib-grid > .bslib-grid-item {
-        height: auto !important;
-        min-height: auto !important;
-      }
-      
-      .bslib-grid.grid {
-        align-content: start;
-      }
-      
-      [class*='bslib-mb-spacing'] {
-        height: auto !important;
-      }
-    "
-    ))
-  ),
+  # header = tags$head(
+  #   tags$style(HTML(
+  #     "
+
+  #     /* Scrollytell specific styles */
+  #     .scrolly-overlay {
+  #       position: sticky;
+  #       top: 0;
+  #       height: 100vh;
+  #       display: flex;
+  #       align-items: center;
+  #       justify-content: center;
+  #     }
+
+  #     .scrolly-section {
+  #       min-height: 100vh;
+  #       display: flex;
+  #       align-items: center;
+  #     }
+
+  #     /* Grid layout adjustments */
+  #     .bslib-grid {
+  #       height: auto !important;
+  #       align-items: start;
+  #     }
+
+  #     .bslib-grid > .bslib-grid-item {
+  #       height: auto !important;
+  #       min-height: auto !important;
+  #     }
+
+  #     .bslib-grid.grid {
+  #       align-content: start;
+  #     }
+
+  #     [class*='bslib-mb-spacing'] {
+  #       height: auto !important;
+  #     }
+  #   "
+  #   ))
+  # ),
 
   # Add custom CSS
   # includeCSS("www/css/main.min.css"),
