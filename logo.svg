@@ -1,0 +1,62 @@
+<svg viewBox='0 0 200 60' width='100%' height='50px'>
+  <defs>
+    <style>
+      .line {
+        transform-origin: center center;
+        animation: none;
+      }
+      svg:hover .line {
+        animation: line-expand 600ms ease forwards;
+      }
+      @keyframes line-expand {
+        from { transform: scaleX(0); }
+        to   { transform: scaleX(1); }
+      }
+    </style>
+  </defs>
+
+  <!-- SHELBY -->
+  <text x='100' y='22'
+    text-anchor='middle'
+    font-family='Nunito Sans, sans-serif'
+    font-weight='300'
+    font-size='14'
+    letter-spacing='7'
+    fill='#4a9a8a'>SHELBY</text>
+
+  <!-- full-width line (animated) -->
+  <line class='line'
+    x1='0' y1='30' x2='200' y2='30'
+    stroke='#4a9a8a'
+    stroke-width='0.8'/>
+
+  <!-- rect cutout over line inside v -->
+  <rect x='93' y='27' width='14' height='4' fill='#3d5163'/>
+
+  <!-- LE -->
+  <text x='58' y='50'
+    text-anchor='middle'
+    font-family='Nunito Sans, sans-serif'
+    font-weight='300'
+    font-size='14'
+    letter-spacing='7'
+    fill='#4a9a8a'>LE</text>
+
+  <!-- v drawn last to sit on top -->
+  <text x='102' y='54'
+    text-anchor='middle'
+    font-family='Nunito Sans, sans-serif'
+    font-weight='100'
+    font-size='22'
+    fill='#4a9a8a'>v</text>
+
+  <!-- EL -->
+  <text x='142' y='50'
+    text-anchor='middle'
+    font-family='Nunito Sans, sans-serif'
+    font-weight='300'
+    font-size='14'
+    letter-spacing='7'
+    fill='#4a9a8a'>EL</text>
+
+</svg>

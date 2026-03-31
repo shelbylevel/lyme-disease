@@ -40,7 +40,10 @@ typography:
       weight: [200, 300, 400, 600]
     - family: "Nunito Sans"
       source: google
-      weight: [400, 600]
+      weight: [100, 300, 400, 600]
+    - family: "Montserrat"
+      source: google
+      weight: [100, 200, 300, 400, 600]
   
   base:
     family: "Lato"
@@ -62,10 +65,12 @@ defaults:
     # defaults: # defaults also supports a string as its value
     #   navbar-light-hover-color: $brand-faded_jade
   shiny:
-    defaults:
-      navbar-light-hover-color: $brand-faded-jade
+    # defaults:
+    #   navbar-light-hover-color: $brand-faded-jade
     theme:
       preset: shiny # base
+      defaults:
+        navbar-light-hover-color: $brand-faded-jade
       rules: | # CSS rules
         /* Remove flex from tab content */
         .tab-pane.html-fill-container {
@@ -119,117 +124,119 @@ defaults:
           height: auto !important;
           min-height: 100vh;
         }
-    #   /*****************
-    #   ANIMATED LOGO
-    #   *****************/
+        
+        /*****************
+        ANIMATED LOGO
+        *****************/
 
-    #   /* the line in the navbar logo - animation defined in ek-styles.css */
-    #   .icon-line {
-    #     display: block;
-    #     background: $faded-jade;
-    #     width: 100%;
-    #     height: 1.2px;
-    #     margin: auto;
-    #     display: table;
-    #     margin-top: -2.6px;
-    #     margin-bottom: -2.6px;
-    #   }
+        /* Master scale control — change this one value to resize the whole logo */
+        .logo-wrapper {
+          display: inline-block;
+          font-size: clamp(0.6rem, 2cqw, 1rem); /* scales with container/viewport */
+          width: 100%;
+        }
+
+        /* the line in the navbar logo - animation defined in ek-styles.css */
+        .icon-line {
+          display: block;
+          background: $brand-faded-jade;
+          width: 100%;
+          height: 0.075em;
+          margin: auto;
+          margin-top: -0.1625em;
+          margin-bottom: -0.1625em;
+        }
       
-    #   /* covers line inside of letter v */
-    #   .icon-line2 {
-    #     display: block;
-    #     background: $faded-jade-10;
-    #     width: 14%;
-    #     height: 1.7px;
-    #     margin: auto;
-    #     display: table;
-    #     margin-top: 1px;
-    #     margin-bottom: -12px;
-    #     margin-left: 50.5px;
-    #   }
+        /* covers line inside of letter v */
+        .icon-line2 {
+          display: block;
+          background: var(--bslib-navbar-light-bg);
+          width: 14%;
+          left: 43%;        /* (100% - 14%)/2 = 43% */
+          height: 0.10625em;
+          position: relative;
+        }
 
-    #   /* right inner square to smooth out where line and v meet */
-    #   .icon-line2:after {
-    #     content: "";
-    #     position: absolute;
-    #     margin: -20px;
-    #     width: 4px;
-    #     height: 4px;
-    #     transform: rotate(24deg);
-    #     margin-left: 13.2px;
-    #     margin-top: -1.2px;
-    #     background-color: $faded-jade-10;
-    #   }
+        /* right inner square to smooth out where line and v meet */
+        .icon-line2:after {
+        content: "";
+        position: absolute;
+        width: 0.25em;
+        height: 0.25em;
+        transform: rotate(24deg);
+        margin-left: 0.825em;
+        margin-top: -0.075em;
+        background-color: var(--bslib-navbar-light-bg);
+        }
 
-    #   /* left inner square to smooth out where line and v meet */
-    #   .icon-line2:before {
-    #     content: "";
-    #     position: absolute;
-    #     margin: 0px;
-    #     width: 4px;
-    #     height: 4px;
-    #     transform: rotate(336deg);
-    #     margin-left: -0.8px;
-    #     margin-top: -1.2px;
-    #     background-color: $faded-jade-10;
-    #   }
+        /* left inner square to smooth out where line and v meet */
+        .icon-line2:before {
+        content: "";
+        position: absolute;
+        width: 0.25em;
+        height: 0.25em;
+        transform: rotate(336deg);
+        margin-left: -0.05em;
+        margin-top: -0.075em;
+        background-color: var(--bslib-navbar-light-bg);
+        }
 
-    #   .first-name {
-    #     font-family: "Nunito Sans";
-    #     font-size: 1.25rem;
-    #     font-weight: 300;
-    #     letter-spacing: .46rem;
-    #     margin-right: -7px;
-    #   }
+        .first-name {
+        font-family: "Nunito Sans";
+        font-size: 1em;
+        font-weight: 300;
+        letter-spacing: 0.46em;
+        margin-right: 0.4375em;
+        }
 
-    #   .v {
-    #     font-family: "Nunito Sans";
-    #     font-size: 1.9rem;
-    #     font-weight: 100;
-    #     padding-left: 0px;
-    #     padding-right: 4.5px;
-    #   }
+        .v {
+        font-family: "Nunito Sans";
+        font-size: 1.5em;
+        font-weight: 100;
+        padding-right: 0.28125em;
+        }
 
-    #   /* navbar */
-    #   .navbar-title {
-    #     font-family: "Nunito Sans";
-    #     font-size: 1.25rem;
-    #     font-weight: 200;
-    #     letter-spacing: .46rem;
-    #     color: $faded-jade;
-    #   }
+        /* navbar */
+        .navbar-title {
+        container-type: inline-size;
+        font-family: "Nunito Sans";
+        font-size: 1em;
+        font-weight: 200;
+        letter-spacing: 0.46em;
+        color: $brand-faded-jade;
+        }
 
-    #   .last-name {
-    #     font-family: "Nunito Sans";
-    #     font-size: 1.25rem;
-    #     font-weight: 300;
-    #     letter-spacing: .46rem;
-    #     padding-left: 9px;
-    #   }
+        .last-name {
+        font-family: "Nunito Sans";
+        font-size: 1em;
+        font-weight: 300;
+        letter-spacing: 0.46em;
+        padding-left: 0.5625em;
+        }
 
-    #   .last-name2 {
-    #     font-family: "Nunito Sans";
-    #     font-size: 1.25rem;
-    #     font-weight: 300;
-    #     letter-spacing: .46rem;
-    #     margin-left: -17px;
-    #   }
+        .last-name2 {
+        font-family: "Nunito Sans";
+        font-size: 1em;
+        font-weight: 300;
+        letter-spacing: 0.46em;
+        margin-left: 0.3125em;
+        }
 
-    #   /*****************
-    #   LOGO ANIMATION
-    #   *****************/
+        /*****************
+        LOGO ANIMATION
+        *****************/
 
-    #   .navbar-title:hover > .icon-line {
-    #     animation-duration: 600ms;
-    #     animation-name: line-expand;
-    #   }
+        .bslib-nav-item:hover > .icon-line {
+        animation-duration: 600ms;
+        animation-name: line-expand;
+        }
 
-    #   @keyframes line-expand {
-    #     from {
-    #       width: 0%;
-    #     }
+        @keyframes line-expand {
+          from {
+            width: 0%;
+          }
 
-    #     to {
-    #       width: 100%;
-    #     }
-    #   }
+          to {
+            width: 100%;
+          }
+        }

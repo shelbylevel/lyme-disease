@@ -96,6 +96,12 @@ bslib::page_navbar(
     public_health_ui("public_health")
   ),
 
+  # ------ Custom Branding in Navbar ---------------------------------------------
+  nav_spacer(), # Pushes everything after this to the right
+  nav_item(
+    htmltools::includeHTML("www/logo.svg")
+  ),
+
   # ------ Footer ----------------------------------------------------------------
   footer = tags$div(
     class = "footer",
