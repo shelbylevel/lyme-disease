@@ -10,10 +10,11 @@ bslib::page_navbar(
   #fillable = TRUE, # Makes pages fill the viewport height
 
   # Set theme with Lyme disease colors
-  theme = bslib::bs_theme(
-    # preset = "shiny", # maybe sandstone
-    brand = "www/sl-brand.yml"
-  ),
+  theme = slbrand::theme_sl(),
+  # theme = bslib::bs_theme(
+  #   # preset = "shiny", # maybe sandstone
+  #   brand = "www/sl-brand.yml"
+  # ),
 
   # ------ Custom CSS ------------------------------------------------------------
   # header = tags$head(
@@ -95,6 +96,10 @@ bslib::page_navbar(
     icon = icon("hospital"),
     public_health_ui("public_health")
   ),
+
+  nav_spacer(),
+  slbrand::logo_nav_item(),
+  header = slbrand::logo_header(),
 
   # ------ Footer ----------------------------------------------------------------
   footer = tags$div(

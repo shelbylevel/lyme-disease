@@ -47,7 +47,7 @@ typography:
     size: "1rem"
     line-height: 1.6
     weight: 300
-    color: foreground
+    # color: foreground
   
   headings:
     family: "Nunito Sans"
@@ -55,7 +55,7 @@ typography:
     weight: 600
     line-height: 1.2
     color: primary
-    text-transform: uppercase
+    # text-transform: uppercase
 
 defaults:
   bootstrap:
