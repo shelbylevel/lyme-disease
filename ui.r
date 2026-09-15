@@ -4,7 +4,7 @@
 # Lyme Disease and Climate Change Dashboard
 # This file contains the user interface structure
 
-bslib::page_navbar(
+ui <- bslib::page_navbar(
   title = "Lyme Disease in the United States",
   id = "main_nav",
   #fillable = TRUE, # Makes pages fill the viewport height

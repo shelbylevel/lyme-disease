@@ -4,7 +4,7 @@
 # Lyme Disease and Climate Change Dashboard
 # This file contains the server function that handles app logic
 
-function(input, output, session) {
+server <- function(input, output, session) {
   # ------ INITIALIZE ----------------------------------------------------------
   # Initialize session variables
   session$userData$app_started <- Sys.time()
