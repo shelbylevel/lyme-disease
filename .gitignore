@@ -1,3 +1,4 @@
 .DS_Store
 rsconnect/rv/library/
 rv/.quarto/
+.Renviron

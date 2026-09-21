@@ -90,5 +90,4 @@ dependencies = [
     { name = "urltools", repository = "CRAN" },
     { name = "utf8", repository = "CRAN" },
     { name = "yaml", repository = "CRAN" },
-    "keyring",
 ]
