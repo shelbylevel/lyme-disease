@@ -13,11 +13,15 @@ files = [
     "/R",
     "/data",
     "/www",
-    "/renv.lock",
+    "/rv.lock",
+    "/rproject.toml",
     "/.posit/publish/lyme-disease-0A2L.toml",
     "/.posit/publish/deployments/deployment-32RN.toml",
 ]
 validate = true
 product_type = "connect_cloud"
+secrets = [
+    "CENSUS_API_KEY",
+]
 
 [r]
