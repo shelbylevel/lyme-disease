@@ -421,6 +421,13 @@ force_source = false
 dependencies = []
 
 [[packages]]
+name = "filelock"
+version = "1.0.3"
+source = { repository = "https://cran.rstudio.com/" }
+force_source = false
+dependencies = []
+
+[[packages]]
 name = "fontawesome"
 version = "0.5.3"
 source = { repository = "https://cran.rstudio.com/" }
@@ -785,6 +792,18 @@ version = "2.0.0"
 source = { repository = "https://cran.rstudio.com/" }
 force_source = false
 dependencies = []
+
+[[packages]]
+name = "keyring"
+version = "1.4.1"
+source = { repository = "https://cran.rstudio.com/" }
+force_source = false
+dependencies = [
+    "askpass",
+    "filelock",
+    "R6",
+    "yaml",
+]
 
 [[packages]]
 name = "knitr"

@@ -76,14 +76,16 @@ pop_cty_2010_2019 <- tidycensus::get_estimates(
   geography = "county",
   product = "population",
   time_series = TRUE,
-  vintage = 2019
+  vintage = 2019,
+  key = keyring::key_get("CENSUS_API_KEY")
 )
 
 pop_state_2010_2019 <- tidycensus::get_estimates(
   geography = "state",
   product = "population",
   time_series = TRUE,
-  vintage = 2019
+  vintage = 2019,
+  key = keyring::key_get("CENSUS_API_KEY")
 )
 
 pop_2010_2019 <- bind_rows(pop_cty_2010_2019, pop_state_2010_2019) %>%
@@ -117,14 +119,16 @@ pop_cty_2020_2023 <- tidycensus::get_estimates(
   geography = "county",
   product = "population",
   time_series = TRUE,
-  vintage = 2024
+  vintage = 2024,
+  key = keyring::key_get("CENSUS_API_KEY")
 )
 
 pop_state_2020_2023 <- tidycensus::get_estimates(
   geography = "state",
   product = "population",
   time_series = TRUE,
-  vintage = 2024
+  vintage = 2024,
+  key = keyring::key_get("CENSUS_API_KEY")
 )
 
 pop_2020_2023 <- bind_rows(pop_cty_2020_2023, pop_state_2020_2023) %>%
