@@ -15,6 +15,7 @@ files = [
     "/www",
     "/rv.lock",
     "/rproject.toml",
+    "/renv.lock",
     "/.posit/publish/lyme-disease-0A2L.toml",
     "/.posit/publish/deployments/deployment-32RN.toml",
 ]
